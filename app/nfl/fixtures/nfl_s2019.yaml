@@ -1,0 +1,3330 @@
+- model: nfl.game
+  pk: 365
+  fields:
+    week: 1
+    timestamp: 2019-08-02 00:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 366
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 367
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:00:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 368
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:30:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 369
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:30:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 370
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:30:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 371
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:30:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 372
+  fields:
+    week: 2
+    timestamp: 2019-08-08 23:30:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 373
+  fields:
+    week: 2
+    timestamp: 2019-08-09 00:00:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 374
+  fields:
+    week: 2
+    timestamp: 2019-08-09 00:00:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 375
+  fields:
+    week: 2
+    timestamp: 2019-08-09 02:00:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 376
+  fields:
+    week: 2
+    timestamp: 2019-08-09 02:00:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 377
+  fields:
+    week: 2
+    timestamp: 2019-08-09 23:30:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 378
+  fields:
+    week: 2
+    timestamp: 2019-08-10 00:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 379
+  fields:
+    week: 2
+    timestamp: 2019-08-11 00:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 380
+  fields:
+    week: 2
+    timestamp: 2019-08-11 00:00:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 381
+  fields:
+    week: 2
+    timestamp: 2019-08-11 01:00:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 382
+  fields:
+    week: 3
+    timestamp: 2019-08-15 23:00:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 383
+  fields:
+    week: 3
+    timestamp: 2019-08-15 23:30:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 384
+  fields:
+    week: 3
+    timestamp: 2019-08-15 23:30:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 385
+  fields:
+    week: 3
+    timestamp: 2019-08-15 23:30:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 386
+  fields:
+    week: 3
+    timestamp: 2019-08-16 00:00:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 387
+  fields:
+    week: 3
+    timestamp: 2019-08-16 23:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 388
+  fields:
+    week: 3
+    timestamp: 2019-08-16 23:30:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 389
+  fields:
+    week: 3
+    timestamp: 2019-08-16 23:30:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 390
+  fields:
+    week: 3
+    timestamp: 2019-08-17 20:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 391
+  fields:
+    week: 3
+    timestamp: 2019-08-17 23:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 392
+  fields:
+    week: 3
+    timestamp: 2019-08-17 23:30:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 393
+  fields:
+    week: 3
+    timestamp: 2019-08-18 00:00:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 394
+  fields:
+    week: 3
+    timestamp: 2019-08-18 02:00:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 395
+  fields:
+    week: 3
+    timestamp: 2019-08-18 20:00:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 396
+  fields:
+    week: 3
+    timestamp: 2019-08-19 00:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 397
+  fields:
+    week: 3
+    timestamp: 2019-08-20 00:00:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 398
+  fields:
+    week: 4
+    timestamp: 2019-08-22 23:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 399
+  fields:
+    week: 4
+    timestamp: 2019-08-22 23:30:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 400
+  fields:
+    week: 4
+    timestamp: 2019-08-22 23:30:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 401
+  fields:
+    week: 4
+    timestamp: 2019-08-22 23:30:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 402
+  fields:
+    week: 4
+    timestamp: 2019-08-23 00:00:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 403
+  fields:
+    week: 4
+    timestamp: 2019-08-23 00:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 404
+  fields:
+    week: 4
+    timestamp: 2019-08-23 23:30:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 405
+  fields:
+    week: 4
+    timestamp: 2019-08-24 00:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 406
+  fields:
+    week: 4
+    timestamp: 2019-08-24 17:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 407
+  fields:
+    week: 4
+    timestamp: 2019-08-24 23:00:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 408
+  fields:
+    week: 4
+    timestamp: 2019-08-24 23:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 409
+  fields:
+    week: 4
+    timestamp: 2019-08-24 23:30:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 410
+  fields:
+    week: 4
+    timestamp: 2019-08-25 00:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 411
+  fields:
+    week: 4
+    timestamp: 2019-08-25 01:00:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 412
+  fields:
+    week: 4
+    timestamp: 2019-08-25 02:00:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 413
+  fields:
+    week: 4
+    timestamp: 2019-08-26 00:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 414
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 415
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 416
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 417
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:00:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 418
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:00:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 419
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:30:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 420
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:30:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 421
+  fields:
+    week: 5
+    timestamp: 2019-08-29 23:30:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 422
+  fields:
+    week: 5
+    timestamp: 2019-08-30 00:00:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 423
+  fields:
+    week: 5
+    timestamp: 2019-08-30 00:00:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 424
+  fields:
+    week: 5
+    timestamp: 2019-08-30 00:00:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 425
+  fields:
+    week: 5
+    timestamp: 2019-08-30 00:00:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 426
+  fields:
+    week: 5
+    timestamp: 2019-08-30 00:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 427
+  fields:
+    week: 5
+    timestamp: 2019-08-30 01:00:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 428
+  fields:
+    week: 5
+    timestamp: 2019-08-30 02:00:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 429
+  fields:
+    week: 5
+    timestamp: 2019-08-30 02:00:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 430
+  fields:
+    week: 6
+    timestamp: 2019-09-06 00:20:00+00:00
+    home_team: 1
+    home_team_score: 3
+    visitor_team: 20
+    visitor_team_score: 10
+    final: true
+- model: nfl.game
+  pk: 431
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 21
+    home_team_score: 27
+    visitor_team: 24
+    visitor_team_score: 30
+    final: true
+- model: nfl.game
+  pk: 432
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 5
+    home_team_score: 13
+    visitor_team: 31
+    visitor_team_score: 43
+    final: true
+- model: nfl.game
+  pk: 433
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 17
+    home_team_score: 26
+    visitor_team: 9
+    visitor_team_score: 40
+    final: true
+- model: nfl.game
+  pk: 434
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 12
+    home_team_score: 10
+    visitor_team: 25
+    visitor_team_score: 59
+    final: true
+- model: nfl.game
+  pk: 435
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 32
+    home_team_score: 28
+    visitor_team: 14
+    visitor_team_score: 12
+    final: true
+- model: nfl.game
+  pk: 436
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 18
+    home_team_score: 16
+    visitor_team: 3
+    visitor_team_score: 17
+    final: true
+- model: nfl.game
+  pk: 437
+  fields:
+    week: 6
+    timestamp: 2019-09-08 17:00:00+00:00
+    home_team: 13
+    home_team_score: 32
+    visitor_team: 26
+    visitor_team_score: 27
+    final: true
+- model: nfl.game
+  pk: 438
+  fields:
+    week: 6
+    timestamp: 2019-09-08 20:05:00+00:00
+    home_team: 8
+    home_team_score: 30
+    visitor_team: 10
+    visitor_team_score: 24
+    final: true
+- model: nfl.game
+  pk: 439
+  fields:
+    week: 6
+    timestamp: 2019-09-08 20:05:00+00:00
+    home_team: 28
+    home_team_score: 21
+    visitor_team: 2
+    visitor_team_score: 20
+    final: true
+- model: nfl.game
+  pk: 440
+  fields:
+    week: 6
+    timestamp: 2019-09-08 20:25:00+00:00
+    home_team: 7
+    home_team_score: 27
+    visitor_team: 19
+    visitor_team_score: 27
+    final: true
+- model: nfl.game
+  pk: 441
+  fields:
+    week: 6
+    timestamp: 2019-09-08 20:25:00+00:00
+    home_team: 11
+    home_team_score: 35
+    visitor_team: 16
+    visitor_team_score: 17
+    final: true
+- model: nfl.game
+  pk: 442
+  fields:
+    week: 6
+    timestamp: 2019-09-08 20:25:00+00:00
+    home_team: 6
+    home_team_score: 17
+    visitor_team: 15
+    visitor_team_score: 31
+    final: true
+- model: nfl.game
+  pk: 443
+  fields:
+    week: 6
+    timestamp: 2019-09-09 00:20:00+00:00
+    home_team: 22
+    home_team_score: 33
+    visitor_team: 29
+    visitor_team_score: 3
+    final: true
+- model: nfl.game
+  pk: 444
+  fields:
+    week: 6
+    timestamp: 2019-09-09 23:10:00+00:00
+    home_team: 27
+    home_team_score: 30
+    visitor_team: 30
+    visitor_team_score: 28
+    final: true
+- model: nfl.game
+  pk: 445
+  fields:
+    week: 6
+    timestamp: 2019-09-10 02:20:00+00:00
+    home_team: 23
+    home_team_score: 24
+    visitor_team: 4
+    visitor_team_score: 16
+    final: true
+- model: nfl.game
+  pk: 446
+  fields:
+    week: 7
+    timestamp: 2019-09-13 00:20:00+00:00
+    home_team: 21
+    home_team_score: 14
+    visitor_team: 6
+    visitor_team_score: 20
+    final: true
+- model: nfl.game
+  pk: 447
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 25
+    home_team_score: 23
+    visitor_team: 7
+    visitor_team_score: 17
+    final: true
+- model: nfl.game
+  pk: 448
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 2
+    home_team_score: 17
+    visitor_team: 15
+    visitor_team_score: 41
+    final: true
+- model: nfl.game
+  pk: 449
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 19
+    home_team_score: 13
+    visitor_team: 8
+    visitor_team_score: 10
+    final: true
+- model: nfl.game
+  pk: 450
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 20
+    home_team_score: 21
+    visitor_team: 32
+    visitor_team_score: 16
+    final: true
+- model: nfl.game
+  pk: 451
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 30
+    home_team_score: 13
+    visitor_team: 17
+    visitor_team_score: 12
+    final: true
+- model: nfl.game
+  pk: 452
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 12
+    home_team_score: 0
+    visitor_team: 22
+    visitor_team_score: 43
+    final: true
+- model: nfl.game
+  pk: 453
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 16
+    home_team_score: 14
+    visitor_team: 3
+    visitor_team_score: 28
+    final: true
+- model: nfl.game
+  pk: 454
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 29
+    home_team_score: 26
+    visitor_team: 28
+    visitor_team_score: 28
+    final: true
+- model: nfl.game
+  pk: 455
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 31
+    home_team_score: 17
+    visitor_team: 10
+    visitor_team_score: 19
+    final: true
+- model: nfl.game
+  pk: 456
+  fields:
+    week: 7
+    timestamp: 2019-09-15 17:00:00+00:00
+    home_team: 26
+    home_team_score: 21
+    visitor_team: 11
+    visitor_team_score: 31
+    final: true
+- model: nfl.game
+  pk: 457
+  fields:
+    week: 7
+    timestamp: 2019-09-15 20:05:00+00:00
+    home_team: 23
+    home_team_score: 10
+    visitor_team: 9
+    visitor_team_score: 28
+    final: true
+- model: nfl.game
+  pk: 458
+  fields:
+    week: 7
+    timestamp: 2019-09-15 20:25:00+00:00
+    home_team: 4
+    home_team_score: 14
+    visitor_team: 1
+    visitor_team_score: 16
+    final: true
+- model: nfl.game
+  pk: 459
+  fields:
+    week: 7
+    timestamp: 2019-09-15 20:25:00+00:00
+    home_team: 24
+    home_team_score: 27
+    visitor_team: 27
+    visitor_team_score: 9
+    final: true
+- model: nfl.game
+  pk: 460
+  fields:
+    week: 7
+    timestamp: 2019-09-16 00:20:00+00:00
+    home_team: 14
+    home_team_score: 24
+    visitor_team: 13
+    visitor_team_score: 20
+    final: true
+- model: nfl.game
+  pk: 461
+  fields:
+    week: 7
+    timestamp: 2019-09-17 00:15:00+00:00
+    home_team: 18
+    home_team_score: 3
+    visitor_team: 5
+    visitor_team_score: 23
+    final: true
+- model: nfl.game
+  pk: 462
+  fields:
+    week: 8
+    timestamp: 2019-09-20 00:20:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 463
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 464
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 465
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 466
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 467
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 468
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 469
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 470
+  fields:
+    week: 8
+    timestamp: 2019-09-22 17:00:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 471
+  fields:
+    week: 8
+    timestamp: 2019-09-22 20:05:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 472
+  fields:
+    week: 8
+    timestamp: 2019-09-22 20:05:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 473
+  fields:
+    week: 8
+    timestamp: 2019-09-22 20:25:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 474
+  fields:
+    week: 8
+    timestamp: 2019-09-22 20:25:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 475
+  fields:
+    week: 8
+    timestamp: 2019-09-22 20:25:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 476
+  fields:
+    week: 8
+    timestamp: 2019-09-23 00:20:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 477
+  fields:
+    week: 8
+    timestamp: 2019-09-24 00:15:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 478
+  fields:
+    week: 9
+    timestamp: 2019-09-27 00:20:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 479
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 480
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 481
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 482
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 483
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 484
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 485
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 486
+  fields:
+    week: 9
+    timestamp: 2019-09-29 17:00:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 487
+  fields:
+    week: 9
+    timestamp: 2019-09-29 20:05:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 488
+  fields:
+    week: 9
+    timestamp: 2019-09-29 20:05:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 489
+  fields:
+    week: 9
+    timestamp: 2019-09-29 20:25:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 490
+  fields:
+    week: 9
+    timestamp: 2019-09-29 20:25:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 491
+  fields:
+    week: 9
+    timestamp: 2019-09-30 00:20:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 492
+  fields:
+    week: 9
+    timestamp: 2019-10-01 00:15:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 493
+  fields:
+    week: 10
+    timestamp: 2019-10-04 00:20:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 494
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 495
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 496
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 497
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 498
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 499
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 500
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 501
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 502
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 503
+  fields:
+    week: 10
+    timestamp: 2019-10-06 17:00:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 504
+  fields:
+    week: 10
+    timestamp: 2019-10-06 20:05:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 505
+  fields:
+    week: 10
+    timestamp: 2019-10-06 20:25:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 506
+  fields:
+    week: 10
+    timestamp: 2019-10-07 00:20:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 507
+  fields:
+    week: 10
+    timestamp: 2019-10-08 00:15:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 508
+  fields:
+    week: 11
+    timestamp: 2019-10-11 00:20:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 509
+  fields:
+    week: 11
+    timestamp: 2019-10-13 13:30:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 510
+  fields:
+    week: 11
+    timestamp: 2019-10-13 17:00:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 511
+  fields:
+    week: 11
+    timestamp: 2019-10-13 17:00:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 512
+  fields:
+    week: 11
+    timestamp: 2019-10-13 17:00:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 513
+  fields:
+    week: 11
+    timestamp: 2019-10-13 17:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 514
+  fields:
+    week: 11
+    timestamp: 2019-10-13 17:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 515
+  fields:
+    week: 11
+    timestamp: 2019-10-13 17:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 516
+  fields:
+    week: 11
+    timestamp: 2019-10-13 20:05:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 517
+  fields:
+    week: 11
+    timestamp: 2019-10-13 20:05:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 518
+  fields:
+    week: 11
+    timestamp: 2019-10-13 20:25:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 519
+  fields:
+    week: 11
+    timestamp: 2019-10-13 20:25:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 520
+  fields:
+    week: 11
+    timestamp: 2019-10-14 00:20:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 521
+  fields:
+    week: 11
+    timestamp: 2019-10-15 00:15:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 522
+  fields:
+    week: 12
+    timestamp: 2019-10-18 00:20:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 523
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 524
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 525
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 526
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 527
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 528
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 529
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 530
+  fields:
+    week: 12
+    timestamp: 2019-10-20 17:00:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 531
+  fields:
+    week: 12
+    timestamp: 2019-10-20 20:05:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 532
+  fields:
+    week: 12
+    timestamp: 2019-10-20 20:25:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 533
+  fields:
+    week: 12
+    timestamp: 2019-10-20 20:25:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 534
+  fields:
+    week: 12
+    timestamp: 2019-10-21 00:20:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 535
+  fields:
+    week: 12
+    timestamp: 2019-10-22 00:15:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 536
+  fields:
+    week: 13
+    timestamp: 2019-10-25 00:20:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 537
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 538
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 539
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 540
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 541
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 542
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 543
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 544
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 545
+  fields:
+    week: 13
+    timestamp: 2019-10-27 17:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 546
+  fields:
+    week: 13
+    timestamp: 2019-10-27 20:05:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 547
+  fields:
+    week: 13
+    timestamp: 2019-10-27 20:25:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 548
+  fields:
+    week: 13
+    timestamp: 2019-10-27 20:25:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 549
+  fields:
+    week: 13
+    timestamp: 2019-10-28 00:20:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 550
+  fields:
+    week: 13
+    timestamp: 2019-10-29 00:15:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 551
+  fields:
+    week: 14
+    timestamp: 2019-11-01 00:20:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 552
+  fields:
+    week: 14
+    timestamp: 2019-11-03 14:30:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 553
+  fields:
+    week: 14
+    timestamp: 2019-11-03 18:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 554
+  fields:
+    week: 14
+    timestamp: 2019-11-03 18:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 555
+  fields:
+    week: 14
+    timestamp: 2019-11-03 18:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 556
+  fields:
+    week: 14
+    timestamp: 2019-11-03 18:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 557
+  fields:
+    week: 14
+    timestamp: 2019-11-03 18:00:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 558
+  fields:
+    week: 14
+    timestamp: 2019-11-03 18:00:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 559
+  fields:
+    week: 14
+    timestamp: 2019-11-03 21:05:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 560
+  fields:
+    week: 14
+    timestamp: 2019-11-03 21:05:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 561
+  fields:
+    week: 14
+    timestamp: 2019-11-03 21:25:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 562
+  fields:
+    week: 14
+    timestamp: 2019-11-03 21:25:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 563
+  fields:
+    week: 14
+    timestamp: 2019-11-04 01:20:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 564
+  fields:
+    week: 14
+    timestamp: 2019-11-05 01:15:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 565
+  fields:
+    week: 15
+    timestamp: 2019-11-08 01:20:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 566
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 567
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 568
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 569
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 570
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 571
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 572
+  fields:
+    week: 15
+    timestamp: 2019-11-10 18:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 573
+  fields:
+    week: 15
+    timestamp: 2019-11-10 21:05:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 574
+  fields:
+    week: 15
+    timestamp: 2019-11-10 21:25:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 575
+  fields:
+    week: 15
+    timestamp: 2019-11-10 21:25:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 576
+  fields:
+    week: 15
+    timestamp: 2019-11-11 01:20:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 577
+  fields:
+    week: 15
+    timestamp: 2019-11-12 01:15:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 578
+  fields:
+    week: 16
+    timestamp: 2019-11-15 01:20:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 579
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 580
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 581
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 582
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 583
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 584
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 585
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 586
+  fields:
+    week: 16
+    timestamp: 2019-11-17 18:00:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 587
+  fields:
+    week: 16
+    timestamp: 2019-11-17 21:05:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 588
+  fields:
+    week: 16
+    timestamp: 2019-11-17 21:25:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 589
+  fields:
+    week: 16
+    timestamp: 2019-11-17 21:25:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 590
+  fields:
+    week: 16
+    timestamp: 2019-11-18 01:20:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 591
+  fields:
+    week: 16
+    timestamp: 2019-11-19 01:15:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 592
+  fields:
+    week: 17
+    timestamp: 2019-11-22 01:20:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 593
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 594
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 595
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 596
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 597
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 598
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 599
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 600
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 601
+  fields:
+    week: 17
+    timestamp: 2019-11-24 18:00:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 602
+  fields:
+    week: 17
+    timestamp: 2019-11-24 21:05:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 603
+  fields:
+    week: 17
+    timestamp: 2019-11-24 21:25:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 604
+  fields:
+    week: 17
+    timestamp: 2019-11-25 01:20:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 605
+  fields:
+    week: 17
+    timestamp: 2019-11-26 01:15:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 606
+  fields:
+    week: 18
+    timestamp: 2019-11-28 17:30:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 607
+  fields:
+    week: 18
+    timestamp: 2019-11-28 21:30:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 608
+  fields:
+    week: 18
+    timestamp: 2019-11-29 01:20:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 609
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 610
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 611
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 612
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 613
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 614
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 615
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 616
+  fields:
+    week: 18
+    timestamp: 2019-12-01 18:00:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 617
+  fields:
+    week: 18
+    timestamp: 2019-12-01 21:05:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 618
+  fields:
+    week: 18
+    timestamp: 2019-12-01 21:25:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 619
+  fields:
+    week: 18
+    timestamp: 2019-12-01 21:25:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 620
+  fields:
+    week: 18
+    timestamp: 2019-12-02 01:20:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 621
+  fields:
+    week: 18
+    timestamp: 2019-12-03 01:15:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 622
+  fields:
+    week: 19
+    timestamp: 2019-12-06 01:20:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 623
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 624
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 625
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 626
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 627
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 628
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 629
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 630
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 631
+  fields:
+    week: 19
+    timestamp: 2019-12-08 18:00:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 632
+  fields:
+    week: 19
+    timestamp: 2019-12-08 21:05:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 633
+  fields:
+    week: 19
+    timestamp: 2019-12-08 21:25:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 634
+  fields:
+    week: 19
+    timestamp: 2019-12-08 21:25:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 635
+  fields:
+    week: 19
+    timestamp: 2019-12-08 21:25:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 636
+  fields:
+    week: 19
+    timestamp: 2019-12-09 01:20:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 637
+  fields:
+    week: 19
+    timestamp: 2019-12-10 01:15:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 638
+  fields:
+    week: 20
+    timestamp: 2019-12-13 01:20:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 639
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 640
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 22
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 641
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 6
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 642
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 643
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 4
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 644
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 645
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 646
+  fields:
+    week: 20
+    timestamp: 2019-12-15 18:00:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 647
+  fields:
+    week: 20
+    timestamp: 2019-12-15 21:05:00+00:00
+    home_team: 7
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 648
+  fields:
+    week: 20
+    timestamp: 2019-12-15 21:05:00+00:00
+    home_team: 23
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 649
+  fields:
+    week: 20
+    timestamp: 2019-12-15 21:05:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 650
+  fields:
+    week: 20
+    timestamp: 2019-12-15 21:25:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 651
+  fields:
+    week: 20
+    timestamp: 2019-12-15 21:25:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 652
+  fields:
+    week: 20
+    timestamp: 2019-12-16 01:20:00+00:00
+    home_team: 29
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 653
+  fields:
+    week: 20
+    timestamp: 2019-12-17 01:15:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 654
+  fields:
+    week: 21
+    timestamp: 2019-12-21 18:00:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 655
+  fields:
+    week: 21
+    timestamp: 2019-12-21 21:30:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 656
+  fields:
+    week: 21
+    timestamp: 2019-12-22 01:15:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 24
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 657
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 14
+    home_team_score: null
+    visitor_team: 17
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 658
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 5
+    home_team_score: null
+    visitor_team: 25
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 659
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 10
+    home_team_score: null
+    visitor_team: 21
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 660
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 12
+    home_team_score: null
+    visitor_team: 2
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 661
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 18
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 662
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 31
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 663
+  fields:
+    week: 21
+    timestamp: 2019-12-22 18:00:00+00:00
+    home_team: 26
+    home_team_score: null
+    visitor_team: 16
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 664
+  fields:
+    week: 21
+    timestamp: 2019-12-22 21:05:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 19
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 665
+  fields:
+    week: 21
+    timestamp: 2019-12-22 21:05:00+00:00
+    home_team: 8
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 666
+  fields:
+    week: 21
+    timestamp: 2019-12-22 21:25:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 11
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 667
+  fields:
+    week: 21
+    timestamp: 2019-12-22 21:25:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 668
+  fields:
+    week: 21
+    timestamp: 2019-12-23 01:20:00+00:00
+    home_team: 1
+    home_team_score: null
+    visitor_team: 9
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 669
+  fields:
+    week: 21
+    timestamp: 2019-12-24 01:15:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 670
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 3
+    home_team_score: null
+    visitor_team: 18
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 671
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 21
+    home_team_score: null
+    visitor_team: 27
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 672
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 2
+    home_team_score: null
+    visitor_team: 5
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 673
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 19
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 674
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 8
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 675
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 32
+    home_team_score: null
+    visitor_team: 1
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 676
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 12
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 677
+  fields:
+    week: 22
+    timestamp: 2019-12-29 18:00:00+00:00
+    home_team: 6
+    home_team_score: null
+    visitor_team: 14
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 678
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 29
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 679
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 11
+    home_team_score: null
+    visitor_team: 26
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 680
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 681
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 17
+    home_team_score: null
+    visitor_team: 10
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 682
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 16
+    home_team_score: null
+    visitor_team: 13
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 683
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 4
+    home_team_score: null
+    visitor_team: 23
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 684
+  fields:
+    week: 22
+    timestamp: 2019-12-29 21:25:00+00:00
+    home_team: 24
+    home_team_score: null
+    visitor_team: 7
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 685
+  fields:
+    week: 22
+    timestamp: 2019-12-30 01:20:00+00:00
+    home_team: 28
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 686
+  fields:
+    week: 23
+    timestamp: 2020-01-04 21:35:00+00:00
+    home_team: 30
+    home_team_score: null
+    visitor_team: 3
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 687
+  fields:
+    week: 23
+    timestamp: 2020-01-05 01:15:00+00:00
+    home_team: 22
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 688
+  fields:
+    week: 23
+    timestamp: 2020-01-05 18:05:00+00:00
+    home_team: 27
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 689
+  fields:
+    week: 23
+    timestamp: 2020-01-05 21:40:00+00:00
+    home_team: 13
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 690
+  fields:
+    week: 24
+    timestamp: 2020-01-11 21:35:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 32
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 691
+  fields:
+    week: 24
+    timestamp: 2020-01-12 01:15:00+00:00
+    home_team: 25
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 692
+  fields:
+    week: 24
+    timestamp: 2020-01-12 20:05:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 30
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 693
+  fields:
+    week: 24
+    timestamp: 2020-01-12 23:40:00+00:00
+    home_team: 20
+    home_team_score: null
+    visitor_team: 28
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 694
+  fields:
+    week: 25
+    timestamp: 2020-01-19 20:05:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 31
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 695
+  fields:
+    week: 25
+    timestamp: 2020-01-19 23:40:00+00:00
+    home_team: 15
+    home_team_score: null
+    visitor_team: 20
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 696
+  fields:
+    week: 26
+    timestamp: 2020-01-26 20:00:00+00:00
+    home_team: 33
+    home_team_score: null
+    visitor_team: 34
+    visitor_team_score: null
+    final: false
+- model: nfl.game
+  pk: 697
+  fields:
+    week: 27
+    timestamp: 2020-02-02 23:30:00+00:00
+    home_team: 9
+    home_team_score: null
+    visitor_team: 15
+    visitor_team_score: null
+    final: false
