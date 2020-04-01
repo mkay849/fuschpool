@@ -112,7 +112,7 @@ class StadiumChoices(models.TextChoices):
 class PickChoices(models.IntegerChoices):
     TBP = 0
     HOME_TEAM = 1
-    AWAY_TEAM = 2
+    VISITOR_TEAM = 2
     TIED_GAME = 3
 
 
