@@ -1,0 +1,31 @@
+{% extends 'nfl/index.html' %}{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="menu-bg card-header text-center">
+            <h2>{% trans 'Status of the season' %} {{ season }}</h2>
+        </div>
+        <div class="bg-light-gray card-body">{% if players %}
+            <table class="table table-striped">
+            <thead>
+                <tr class="justify-content-center">
+                    <th scope="col">{% trans 'Name' %}</th>
+                    <th scope="col">{% trans 'Standings' %}<br><small>(W - L - T)</small></th>
+                    <th scope="col">{% trans 'Pct' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                <tr>
+                    <td>{{ team.full_name }}</td>
+                    <td>{{ team.won }} - {{ team.lost }} - {{ team.tie }}</td>
+                    <td>{{ team.won_lost_ratio | floatformat:3 }}</td>
+                </tr>
+                {% endfor %}
+            <tbody>
+        </table>{% else %}
+        <p class="card-text">{% trans 'There are no players in this pool, yet' %}<p>
+        {% endif %}</div>
+    </div>
+{% endblock %}

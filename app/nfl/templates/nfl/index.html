@@ -1,0 +1,23 @@
+{% extends 'core/index.html' %}{% load i18n static %}
+
+{% block app_favicons %}
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'nfl/img/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'nfl/img/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'nfl/img/favicon-16x16.png' %}">
+{% endblock %}
+
+{% block app_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'nfl/css/custom.css'%}">
+{% endblock %}
+
+{% block pickpool_app_navbar %}
+<li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if request.path == '/nfl/' %} active{% endif %}" href="{% url 'nfl:standings' %}">{% trans 'Standings' %}</a></li>
+<li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/schedule' in request.path %} active{% endif %}" href="{% url 'nfl:schedule' %}">{% trans 'Schedule' %}</a></li>
+<li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/picks' in request.path %} active{% endif %}" href="{% url 'nfl:make_picks' %}">{% trans 'Picks' %}</a></li>
+<li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/teams' in request.path %} active{% endif %}" href="{% url 'nfl:teams' %}">{% trans 'Teams' %}</a></li>
+{% endblock %}
+
+{% block pickpool_apps %}
+{{ block.super }}
+<a class="btn btn-primary nav-link{% if 'nfl/' in request.path %} active{% endif %}" href="{% url 'nfl:standings' %}">NFL</a>
+{% endblock %}

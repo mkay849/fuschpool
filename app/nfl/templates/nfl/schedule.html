@@ -1,0 +1,57 @@
+{% extends 'nfl/index.html' %}{% load i18n static %}
+
+{% block content %}
+<div class="container">
+    <div class="card bg-transparent">
+        <div class="menu-bg card-header text-center">
+            <h2>{% trans 'Games of week' %} {{ week | add:1 | stringformat:'02d' }} / {{ season }}</h2>
+        </div>
+        <div class="bg-light-gray card-body">{% if next_games %}
+            <div class="card-deck">
+                <div class="card bg-light-gray text-right">
+                    <h4 class="card-header">{% trans 'Visitor Team' %}
+                </div>
+                <div class="card bg-light-gray text-center" style="max-width: 6rem;">
+                    <h4 class="card-header">{% trans 'Tie' %}
+                </div>
+                <div class="card bg-light-gray text-left">
+                    <h4 class="card-header">{% trans 'Home Team' %}
+                </div>
+            </div>
+            {% for game in next_games %}
+            <div class="card-deck">
+                <div class="card bg-transparent text-right">
+                    <div class="card-body">
+                        <img class="float-left team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.visitor_team.short_name | lower }}.svg">
+                        <h5 class="card-title">{{ game.visitor_team.full_name }}</h5>
+                        {% with standings=game.visitor_team.standings %}
+                        <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
+                        {% endwith %}
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>{{ game.timestamp }}</small>
+                    </div>
+                </div>
+                <div class="card bg-transparent text-center" style="max-width: 6rem;">
+                    <div class="card-body">
+                        <p class="card-text">{% trans 'None' %}</p>
+                    </div>
+                </div>
+                <div class="card bg-transparent text-left">
+                    <div class="card-body">
+                        <img class="float-right team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.home_team.short_name | lower }}.svg">
+                        <h5 class="card-title">{{ game.home_team.full_name }}</h5>
+                        {% with standings=game.home_team.standings %}
+                        <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
+                        {% endwith %}
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>{{ game.timestamp }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}{% else %}
+        <p class="card-text">{% trans 'There are no games for week' %} {{ week }}/{{ season }}<p>
+        {% endif %}</div>
+    </div>
+{% endblock %}
