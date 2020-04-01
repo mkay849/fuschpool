@@ -1,0 +1,75 @@
+{% load bootstrap4 i18n static %}
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <title>Fuschpool pick'em pool</title>
+    {% bootstrap_css %}
+    {% block app_favicons %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/core.css'%}">
+    {% block app_css %}{% endblock %}
+  </head>
+  <body class="h-100">
+    {% if user.is_authenticated %}
+      <nav class="fixed-top fixed-top-2 justify-content-center menu-bg navbar navbar-expand-xl">
+        <ul class="nav">{% block pickpool_app_navbar %}{% endblock %}</ul>
+      </nav>
+      <nav class="fixed-top menu-bg navbar navbar-expand-xl">
+        <ul id=navbar class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="btn btn-primary nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {% trans 'Pick-Pools' %}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% block pickpool_apps %}{% endblock %}
+            </div>
+          </li>
+        </ul>
+        <span class="mr-auto navbar-brand"><h1>Fuschpool Pick'em Pool</h1></span>
+        <span class="nav-item"><a class="btn btn-primary nav-link disabled" href="{% url 'core:profile' %}">{% trans 'Profile' %}</a></span>
+        <span class="nav-item"><a class="btn btn-primary nav-link" href="{% url 'core:logout' %}">{% trans 'Logout' %}</a></span>
+      </nav>
+      <div class="container">
+          <div class="row">{% bootstrap_messages %}</div>
+          <div class="row">{% block content %}{% endblock %}</div>
+        </div>
+      </div>
+      <nav class="fixed-bottom justify-content-center menu-bg navbar navbar-expand-xl">
+        <span class="nav-item"><small>&copy; 2020 Fuschpool by Marcel Konrad</small></span>
+      </nav>
+      {% bootstrap_javascript jquery='full' %}
+      {% comment %} <script type="text/javascript">
+      $(document).ready(function() {
+        $( '#main-navbar a.nav-link' ).on( 'click', function () {
+          $( '#main-navbar .nav-item' ).find( 'a.active' ).removeClass( 'active' );
+          $( this ).addClass( 'active' );
+        });
+        $( '#sub-navbar a.nav-link' ).on( 'click', function () {
+          $( '#sub-navbar .nav-item' ).find( 'a.active' ).removeClass( 'active' );
+          $( this ).addClass( 'active' );
+        });
+      });
+      </script> {% endcomment %}
+      {% block app_javascript %}{% endblock %}
+    {% else %}
+      <div class="container h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-6 mx-auto">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="">Fuschpool pick'em pool</h2>
+              </div>
+              <div class="card-body">
+                <form action='/login/', class="form" method="post">{% csrf_token %}
+                  {% bootstrap_form form %}
+                  {% buttons %}
+                  <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
+                  {% endbuttons %}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </body>
+</html>
