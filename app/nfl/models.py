@@ -106,7 +106,7 @@ class WeekManager(models.Manager):
             for game in cur_week.games.all():
                 game_points = game.evaluate_game()
                 for pick, points in game_points.items():
-                    if pick in user_points:
+                    if pick.user in user_points:
                         user_points[pick.user] += points
                     else:
                         user_points[pick.user] = points
@@ -117,7 +117,7 @@ class WeekManager(models.Manager):
                     res[points].append(user)
                 else:
                     res[points] = [user]
-            return sorted(res, reverse=True)
+            return sorted(res.items(), reverse=True)
         except Week.DoesNotExist:
             return {}
 
