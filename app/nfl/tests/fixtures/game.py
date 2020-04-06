@@ -38,14 +38,14 @@ def make_nfl_game(week):
 
 
 @pytest.fixture
-def nfl_games(make_nfl_game, make_week, week_number: int = None):
+def nfl_games(make_nfl_game, make_week):
     """Fixture creating all games of a nfl week."""
     fixture = Path(settings.BASE_DIR) / "nfl/fixtures/nfl_s2019.yaml"
     with fixture.open("r") as yaml_file:
         data = safe_load(yaml_file)
         for game in data:
             game_data = game["fields"]
-            if week_number and game_data["week"] == week_number:
+            if game_data["week"] == 2:
                 make_nfl_game(
                     week=make_week(week=game_data.get("week")),
                     home_team=Team.objects.get(pk=game_data.get("home_team")),

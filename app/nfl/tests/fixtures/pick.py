@@ -16,7 +16,7 @@ def make_pick(nfl_game, pick_pool_user):
             user=kwargs.get("user", pick_pool_user),
             game=kwargs.get("game", nfl_game),
             selection=kwargs.get("selection", PickChoices.HOME_TEAM),
-            tie_break=kwargs.get("tie_break", 23),
+            picked_tie_break=kwargs.get("tie_break", 23),
         )[0]
 
     return _make_pick

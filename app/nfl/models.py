@@ -131,7 +131,7 @@ class Pick(models.Model):
     selection = models.SmallIntegerField(
         choices=PickChoices.choices, default=PickChoices.TBP
     )
-    tie_break = models.PositiveSmallIntegerField(default=0)
+    picked_tie_break = models.PositiveSmallIntegerField(default=0)
 
     @property
     def awarded_points(self):

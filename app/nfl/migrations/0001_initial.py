@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('selection', models.SmallIntegerField(choices=[(0, 'Tbp'), (1, 'Home Team'), (2, 'Visitor Team'), (3, 'Tied Game')], default=0)),
-                ('tie_break', models.PositiveSmallIntegerField(default=0)),
+                ('picked_tie_break', models.PositiveSmallIntegerField(default=0)),
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='picks', to='nfl.Game')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='picks', to=settings.AUTH_USER_MODEL)),
             ],
