@@ -10,4 +10,6 @@ urlpatterns = [
     path("teams/<int:season>/<int:week>/", TeamsView.as_view(), name="teams",),
     path("schedule/", ScheduleView.as_view(), name="schedule"),
     path("picks/", PicksView.as_view(), name="make_picks"),
+    path("picks/<int:season>/", PicksView.as_view(), name="make_picks"),
+    path("picks/<int:season>/<int:week>/", PicksView.as_view(), name="make_picks"),
 ]

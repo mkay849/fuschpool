@@ -8,7 +8,7 @@ from django.utils.timezone import now
 from django.views.generic import ListView, TemplateView
 
 from nfl.defines import CityChoices, StadiumChoices, TeamChoices
-from nfl.models import Game, Pick, Team
+from nfl.models import Game, Pick, Team, Week, Year
 
 
 class SeasonWeekMixin(object):
@@ -269,26 +269,63 @@ class TeamsView(SeasonPointsMixin, TemplateView):
 
 
 class PicksView(SeasonWeekMixin, ListView):
+    context_object_name = "picks"
     model = Pick
     template_name = "nfl/picks.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.context_object_name in context:
+            picks = context.get(self.context_object_name)
+            new_picks = {}
+            for pick in picks:
+                if pick.user in new_picks:
+                    new_picks[pick.user].append(pick)
+                else:
+                    new_picks[pick.user] = [pick]
+            context[self.context_object_name] = new_picks
+            context["games"] = self.latest_games
+        return context
 
     def get_queryset(self):
         now_ts = now()
         try:
-            latest_games = Game.objects.latest().order_by("timestamp")
-            cur_picks = Pick.objects.filter(game__in=latest_games,)
-            if now_ts >= latest_games.last().timestamp:
-                return cur_picks
+            if "season" in self.kwargs:
+                cur_season = self.kwargs.get("season")
+            else:
+                cur_season = Year.objects.aggregate(cur_season=Max("year")).get(
+                    "cur_season",
+                )
 
-            if (
-                cur_picks.filter(
-                    user=self.resquest.user, game__timestamp__lte=now_ts
-                ).count()
-                == latest_games.filter(timestamp__lte=now_ts).count()
-            ):
-                return cur_picks.filter(game__timestamp__lte=now_ts)
+            if "week" in self.kwargs:
+                cur_week = self.kwargs.get("week")
+            else:
+                cur_week = (
+                    Week.objects.filter(year__year=cur_season)
+                    .aggregate(cur_week=Max("week"))
+                    .get("cur_week")
+                )
+
+            self.latest_games = Game.objects.filter(
+                week__year__year=cur_season, week__week=cur_week
+            ).order_by("timestamp", "home_team")
+            if self.latest_games.exists():
+                cur_picks = Pick.objects.filter(game__in=self.latest_games,)
+                if now_ts < self.latest_games.last().timestamp:
+                    if (
+                        cur_picks.filter(
+                            user=self.resquest.user, game__timestamp__lte=now_ts
+                        ).count()
+                        == self.latest_games.filter(timestamp__lte=now_ts).count()
+                    ):
+                        cur_picks = cur_picks.filter(game__timestamp__lte=now_ts)
+                return cur_picks.order_by(
+                    "user__first_name", "game__timestamp", "game__home_team",
+                )
         except Game.DoesNotExist:
             pass
         except Pick.DoesNotExist:
+            pass
+        except Year.DoesNotExist:
             pass
         return Pick.objects.none()
