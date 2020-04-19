@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
                 ('visitor_team_score', models.PositiveSmallIntegerField(default=None, null=True)),
                 ('final', models.BooleanField(default=False)),
             ],
+            options={'get_latest_by': 'week'},
         ),
         migrations.CreateModel(
             name='Team',
@@ -60,6 +61,7 @@ class Migration(migrations.Migration):
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='picks', to='nfl.Game')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='picks', to=settings.AUTH_USER_MODEL)),
             ],
+            options={'get_latest_by': 'game__week'},
         ),
         migrations.AddField(
             model_name='game',
@@ -77,3 +79,4 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='games', to='nfl.Week'),
         ),
     ]
+

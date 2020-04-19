@@ -135,6 +135,9 @@ class Week(models.Model):
 
 
 class Game(models.Model):
+    class Meta:
+        get_latest_by = "week"
+
     week = models.ForeignKey(Week, on_delete=models.CASCADE, related_name="games")
     timestamp = models.DateTimeField()
     home_team = models.ForeignKey(
@@ -194,6 +197,9 @@ class Game(models.Model):
 
 
 class Pick(models.Model):
+    class Meta:
+        get_latest_by = "game__week"
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="picks"
     )
