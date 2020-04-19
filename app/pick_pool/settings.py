@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = str(Path("..").resolve())
 
 
 # Quick-start development settings - unsuitable for production
@@ -119,6 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/".join((os.path.dirname(BASE_DIR), "static"))
+STATIC_ROOT = str((Path(BASE_DIR) / "../static").resolve())
 
 AUTH_USER_MODEL = "core.PickPoolUser"
