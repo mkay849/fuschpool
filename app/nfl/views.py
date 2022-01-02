@@ -1,90 +1,94 @@
-from datetime import date
-from typing import Tuple
+from datetime import date, datetime, time, timezone
+import logging
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, Q
-from django.db.models.aggregates import Count, Max, Sum
+from django.db.models.aggregates import Count, Sum
 from django.db.models.functions import Coalesce
-from django.utils.timezone import now
 from django.views.generic import ListView, TemplateView
 
-from nfl.defines import CityChoices, StadiumChoices, TeamChoices
-from nfl.models import Game, Pick, Team, Week, Year
+from nfl.defines import CityChoices, SeasonType, StadiumChoices, TeamChoices
+from nfl.models import Game, Pick, Team, Week
+
+logger = logging.getLogger(__name__)
 
 
-class SeasonWeekMixin(object):
-    @staticmethod
-    def _get_real_week(nfl_week: int) -> Tuple[int, str]:
-        if nfl_week is None:
-            return None, None
-        cur_week = nfl_week
-        if nfl_week == 1:
-            season_type = "Hall of Fame Week"
-        elif 1 < nfl_week < 6:
-            season_type = "Preseason"
-            cur_week = nfl_week - 1
-        elif 5 < nfl_week < 23:
-            season_type = "Regular Season"
-            cur_week = nfl_week - 5
-        elif nfl_week == 23:
-            season_type = "Wild Card Weekend"
-        elif cur_week == 24:
-            season_type = "Divisional Playoffs"
-        elif nfl_week == 25:
-            season_type = "Conference Championships"
-        elif nfl_week == 26:
-            season_type = "Pro Bowl"
-        else:
-            season_type = "Super Bowl"
-        return cur_week, season_type
+class WeekMixin(object):
+    week = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if "season" in kwargs:
-            cur_season = kwargs.get("season")
-        else:
-            now = date.today()
-            cur_season = now.year if now.month > 8 else now.year - 1
+        context.update({"week": self.week})
+        return context
 
-        if "week" in kwargs:
-            nfl_week = kwargs.get("week")
-        else:
-            nfl_week = (
-                Game.objects.filter(final=True, week__year__year=cur_season,)
-                .aggregate(cur_week=Max("week"),)
-                .get("cur_week")
-                or 1
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        if "year" in kwargs and "month" in kwargs and "day" in kwargs:
+            cur_date = datetime.combine(
+                date(kwargs["year"], kwargs["month"], kwargs["day"]),
+                time(9),
+                tzinfo=timezone.utc,
             )
-
-        real_week, season_type = SeasonWeekMixin._get_real_week(nfl_week)
-        context.update(
-            {
-                "season": cur_season,
-                "nfl_week": nfl_week,
-                "week": real_week,
-                "season_type": season_type,
-            }
+        else:
+            cur_date = datetime.now(timezone.utc)
+        self.week = (
+            Week.objects.select_related("year")
+            .filter(start_timestamp__lte=cur_date, end_timestamp__gt=cur_date)
+            .first()
         )
-        return context
 
 
-class SeasonGamesMixin(SeasonWeekMixin):
+class SeasonGamesMixin(WeekMixin):
+    season_games = None
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["season_games"] = Game.objects.filter(
-            final=True,
-            week__year__year=context["season"],
-            week__week__lte=context["nfl_week"],
-        )
+        season_games = self.season_games
+        cur_season_type = self.week.season_type
+        if cur_season_type == SeasonType.REGULAR:
+            season_games = season_games.exclude(week__value__lt=5)
+        elif cur_season_type == SeasonType.POST:
+            season_games = season_games.exclude(week__value__lt=23)
+        elif cur_season_type == SeasonType.OFF:
+            pass
+        context["season_games"] = season_games
         return context
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.season_games = Game.objects.filter(
+            final=True,
+            week__year__value=self.week.year.value,
+            week__value__lte=self.week.value,
+        )
+
+
+class WeekGamesMixin(WeekMixin):
+    week_games = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["week_games"] = self.week_games
+        return context
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.week_games = Game.objects.filter(week=self.week).order_by(
+            "timestamp", "home_team"
+        )
 
 
 class TeamsMixin(object):
+    teams = None
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["teams"] = Team.objects.exclude(
-            abbr__in=(TeamChoices.AFC, TeamChoices.NFC)
-        )
+        context["teams"] = self.teams
         return context
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.teams = Team.objects.exclude(id__in=(TeamChoices.AFC, TeamChoices.NFC))
 
 
 class SeasonStandingsMixin(SeasonGamesMixin, TeamsMixin):
@@ -230,19 +234,12 @@ class SeasonPointsMixin(SeasonStandingsMixin):
         return context
 
 
-class ScheduleView(SeasonStandingsMixin, TemplateView):
+class ScheduleView(WeekGamesMixin, TemplateView):
     template_name = "nfl/schedule.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        next_games = Game.objects.filter(
-            week__year__year=context.get("season"), week=context.get("nfl_week") + 1,
-        )
-        context["next_games"] = next_games
-        return context
 
-
-class StandingsView(SeasonWeekMixin, TemplateView):
+class StandingsView(LoginRequiredMixin, WeekMixin, TemplateView):
+    login_url = "/login/"
     template_name = "nfl/standings.html"
 
     def get_context_data(self, **kwargs):
@@ -251,7 +248,8 @@ class StandingsView(SeasonWeekMixin, TemplateView):
         return context
 
 
-class TeamsView(SeasonPointsMixin, TemplateView):
+class TeamsView(LoginRequiredMixin, SeasonPointsMixin, TemplateView):
+    login_url = "/login/"
     template_name = "nfl/teams.html"
 
     def get_context_data(self, **kwargs):
@@ -268,8 +266,9 @@ class TeamsView(SeasonPointsMixin, TemplateView):
         return context
 
 
-class PicksView(SeasonWeekMixin, ListView):
+class PicksView(LoginRequiredMixin, WeekGamesMixin, ListView):
     context_object_name = "picks"
+    login_url = "/login/"
     model = Pick
     template_name = "nfl/picks.html"
 
@@ -277,55 +276,54 @@ class PicksView(SeasonWeekMixin, ListView):
         context = super().get_context_data(**kwargs)
         if self.context_object_name in context:
             picks = context.get(self.context_object_name)
+            user_picks = picks.filter(user=self.request.user)
+            picked_games = [pick.game for pick in user_picks]
             new_picks = {}
             for pick in picks:
-                if pick.user in new_picks:
-                    new_picks[pick.user].append(pick)
-                else:
-                    new_picks[pick.user] = [pick]
+                new_picks[pick.user] = list(
+                    picks.filter(user=pick.user, game__in=picked_games)
+                )
             context[self.context_object_name] = new_picks
-            context["games"] = self.latest_games
+            now_dt = datetime.now(timezone.utc)
+            context["unpicked_games"] = self.week_games.exclude(
+                Q(id__in=[g.id for g in picked_games]) | Q(timestamp__lte=now_dt)
+            )
         return context
 
     def get_queryset(self):
-        now_ts = now()
         try:
-            if "season" in self.kwargs:
-                cur_season = self.kwargs.get("season")
-            else:
-                cur_season = Year.objects.aggregate(cur_season=Max("year")).get(
-                    "cur_season",
-                )
-
-            if "week" in self.kwargs:
-                cur_week = self.kwargs.get("week")
-            else:
-                cur_week = (
-                    Week.objects.filter(year__year=cur_season)
-                    .aggregate(cur_week=Max("week"))
-                    .get("cur_week")
-                )
-
-            self.latest_games = Game.objects.filter(
-                week__year__year=cur_season, week__week=cur_week
-            ).order_by("timestamp", "home_team")
-            if self.latest_games.exists():
-                cur_picks = Pick.objects.filter(game__in=self.latest_games,)
-                if now_ts < self.latest_games.last().timestamp:
-                    if (
-                        cur_picks.filter(
-                            user=self.resquest.user, game__timestamp__lte=now_ts
-                        ).count()
-                        == self.latest_games.filter(timestamp__lte=now_ts).count()
-                    ):
-                        cur_picks = cur_picks.filter(game__timestamp__lte=now_ts)
-                return cur_picks.order_by(
+            if self.week_games.exists():
+                return Pick.objects.filter(game__in=self.week_games).order_by(
                     "user__first_name", "game__timestamp", "game__home_team",
                 )
-        except Game.DoesNotExist:
-            pass
         except Pick.DoesNotExist:
             pass
-        except Year.DoesNotExist:
-            pass
         return Pick.objects.none()
+
+    def post(self, request, *args, **kwargs):
+        picks = []
+        for k, v in request.POST.items():
+            if k[:4] != "pick":
+                continue
+            game_id = k.split("_")[1]
+            tie_break = 0
+            try:
+                pick_choice, tie_break = v.split("_")
+            except ValueError:
+                pick_choice = v
+            try:
+                game = Game.objects.get(id=game_id)
+            except Game.DoesNotExist:
+                logger.warning(f"Unknown game_id={game_id}")
+                continue
+            picks.append(
+                Pick(
+                    user=request.user,
+                    game=game,
+                    selection=pick_choice,
+                    picked_tie_break=tie_break,
+                )
+            )
+        if len(picks):
+            Pick.objects.bulk_create(picks)
+        return self.get(request, *args, **kwargs)

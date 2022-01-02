@@ -13,7 +13,7 @@
 {% block pickpool_app_navbar %}
 <li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if request.path == '/nfl/' %} active{% endif %}" href="{% url 'nfl:standings' %}">{% trans 'Standings' %}</a></li>
 <li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/schedule' in request.path %} active{% endif %}" href="{% url 'nfl:schedule' %}">{% trans 'Schedule' %}</a></li>
-<li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/picks' in request.path %} active{% endif %}" href="{% url 'nfl:make_picks' %}">{% trans 'Picks' %}</a></li>
+<li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/picks' in request.path %} active{% endif %}" href="{% url 'nfl:picks' %}">{% trans 'Picks' %}</a></li>
 <li class="nav-item"><a class="btn btn-primary btn-sm mx-1 nav-link{% if 'nfl/teams' in request.path %} active{% endif %}" href="{% url 'nfl:teams' %}">{% trans 'Teams' %}</a></li>
 {% endblock %}
 
