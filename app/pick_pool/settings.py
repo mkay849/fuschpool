@@ -80,13 +80,14 @@ WSGI_APPLICATION = "pick_pool.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME", "fuschpooldb"),
+        "NAME": os.environ.get("DB_NAME", "dbfuschpool"),
         "USER": os.environ.get("DB_USER", "fuschpool"),
         "PASSWORD": os.environ.get("DB_PASSWORD", "secret"),
         "HOST": os.environ.get("DB_HOST", "localhost"),
         "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 
 # Password validation
