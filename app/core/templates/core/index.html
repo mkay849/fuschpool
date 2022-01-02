@@ -28,7 +28,7 @@
         <span class="nav-item"><a class="btn btn-primary nav-link disabled" href="{% url 'core:profile' %}">{% trans 'Profile' %}</a></span>
         <span class="nav-item"><a class="btn btn-primary nav-link" href="{% url 'core:logout' %}">{% trans 'Logout' %}</a></span>
       </nav>
-      <div class="container">
+      <div class="container pb-5">
           <div class="row">{% bootstrap_messages %}</div>
           <div class="row">{% block content %}{% endblock %}</div>
         </div>
@@ -37,18 +37,6 @@
         <span class="nav-item"><small>&copy; 2020 Fuschpool by Marcel Konrad</small></span>
       </nav>
       {% bootstrap_javascript jquery='full' %}
-      {% comment %} <script type="text/javascript">
-      $(document).ready(function() {
-        $( '#main-navbar a.nav-link' ).on( 'click', function () {
-          $( '#main-navbar .nav-item' ).find( 'a.active' ).removeClass( 'active' );
-          $( this ).addClass( 'active' );
-        });
-        $( '#sub-navbar a.nav-link' ).on( 'click', function () {
-          $( '#sub-navbar .nav-item' ).find( 'a.active' ).removeClass( 'active' );
-          $( this ).addClass( 'active' );
-        });
-      });
-      </script> {% endcomment %}
       {% block app_javascript %}{% endblock %}
     {% else %}
       <div class="container h-100">
