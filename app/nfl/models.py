@@ -1,46 +1,73 @@
-from datetime import date
+from datetime import datetime
 from typing import Dict, List, Tuple
+from pytz import timezone
 
 from django.conf import settings
 from django.db import models
 from django.db.models import F, Q
 from django.db.models.aggregates import Count
-from pytz import timezone
 
 from core.models import PickPoolUser
-from nfl.defines import CityChoices, PickChoices, StadiumChoices, TeamChoices
+from nfl.defines import (
+    CityChoices,
+    PickChoices,
+    SeasonType,
+    StadiumChoices,
+    TeamChoices,
+)
 
 est_tz = timezone("EST")
 
 
+class DateRangeMixin(models.Model):
+    start_timestamp = models.DateTimeField()
+    end_timestamp = models.DateTimeField()
+
+    class Meta:
+        abstract = True
+
+
 class Team(models.Model):
-    city = models.CharField(
-        max_length=3, choices=CityChoices.choices, default=CityChoices.ATLANTA
-    )
-    abbr = models.CharField(
-        max_length=3, choices=TeamChoices.choices, default=TeamChoices.CARDINALS
-    )
-    stadium = models.CharField(
-        max_length=4, choices=StadiumChoices.choices, default=StadiumChoices.AS
-    )
+    id = models.PositiveSmallIntegerField(choices=TeamChoices.choices, primary_key=True)
+    city = models.CharField(max_length=3, choices=CityChoices.choices)
+    stadium = models.CharField(max_length=4, choices=StadiumChoices.choices)
+
+    @property
+    def abbreviation(self) -> str:
+        return TeamChoices(self.id).name
 
     @property
     def full_name(self) -> str:
-        return TeamChoices(self.abbr).label
+        return TeamChoices(self.id).label
 
     @property
     def short_name(self) -> str:
-        return self.full_name.rsplit(" ", 1)[1]
+        if " " in self.full_name:
+            return self.full_name.rsplit(" ", 1)[1]
+        return self.full_name
 
     @property
     def standings(self) -> Tuple[int, int, int]:
-        now = date.today()
-        cur_season = now.year if now.month > 8 else now.year - 1
-        res = Game.objects.filter(
+        cur_date = datetime.now(timezone("UTC"))
+        cur_week = (
+            Week.objects.select_related("year")
+            .filter(start_timestamp__lte=cur_date, end_timestamp__gt=cur_date)
+            .first()
+        )
+        season_games = Game.objects.filter(
             Q(home_team=self.id) | Q(visitor_team=self.id),
             final=True,
-            week__year__year=cur_season,
-        ).aggregate(
+            week__year__value=cur_week.year.value,
+            week__value__lte=cur_week.value,
+        )
+        cur_season_type = cur_week.season_type
+        if cur_season_type == SeasonType.REGULAR:
+            season_games = season_games.exclude(week__value__lt=5)
+        elif cur_season_type == SeasonType.POST:
+            season_games = season_games.exclude(week__value__lt=23)
+        elif cur_season_type == SeasonType.OFF:
+            pass
+        res = season_games.aggregate(
             won=Count(
                 "id",
                 filter=Q(
@@ -67,17 +94,38 @@ class Team(models.Model):
             ),
             tie=Count("id", filter=Q(home_team_score=F("visitor_team_score"))),
         )
-        return res.get("won", 0), res.get("tie", 0), res.get("lost", 0)
+        return res.get("won", 0), res.get("lost", 0), res.get("tie", 0)
 
     def __str__(self) -> str:
-        return f"{TeamChoices(self.abbr).label}"
+        return self.full_name
 
 
-class Year(models.Model):
-    year = models.PositiveSmallIntegerField(unique=True)
+class YearManager(models.Manager):
+    def evaluate_year(self, year: int) -> List[Tuple[int, List[PickPoolUser]]]:
+        """Evaluate a whole season.
+
+        Parameters
+        ----------
+        year : int
+            Year to evaluate
+
+        Returns
+        -------
+        List[Tuple[int, List[PickPoolUser]]]
+            List of tuples containing earned points with corresponding users.
+        """
+        try:
+            cur_year = self.get(year=year)
+        except Year.DoesNotExist:
+            pass
+        return []
+
+
+class Year(DateRangeMixin):
+    value = models.PositiveSmallIntegerField(unique=True)
 
     def __str__(self) -> str:
-        return f"Year: {self.year}"
+        return f"Year: {self.value}"
 
 
 class WeekManager(models.Manager):
@@ -119,24 +167,58 @@ class WeekManager(models.Manager):
                     res[points] = [user]
             return sorted(res.items(), reverse=True)
         except Week.DoesNotExist:
-            return {}
+            return []
 
 
-class Week(models.Model):
+class Week(DateRangeMixin):
     class Meta:
-        unique_together = ["year", "week"]
+        unique_together = ["year", "value"]
 
-    week = models.PositiveSmallIntegerField()
+    value = models.PositiveSmallIntegerField()
     year = models.ForeignKey(Year, on_delete=models.CASCADE)
     objects = WeekManager()
 
+    @property
+    def season_type(self) -> int:
+        if self.value == 1:
+            season_type = SeasonType.PRE  # Hall of Fame Week
+        elif 1 < self.value < 5:
+            season_type = SeasonType.PRE
+        elif 4 < self.value < 23:
+            season_type = SeasonType.REGULAR
+        elif self.value == 23:
+            season_type = SeasonType.POST  # Wild Card Weekend
+        elif self.value == 24:
+            season_type = SeasonType.POST  # Divisional Playoffs
+        elif self.value == 25:
+            season_type = SeasonType.POST  # Conference Championships
+        elif self.value == 26:
+            season_type = SeasonType.POST  # Pro Bowl
+        elif self.value == 27:
+            season_type = SeasonType.POST  # Super Bowl
+        else:
+            season_type = SeasonType.OFF
+        return season_type
+
+    @property
+    def nfl_week(self) -> int:
+        if self.value < 5:
+            return self.value
+        elif 4 < self.value < 23:
+            return self.value - 4
+        elif 22 < self.value < 28:
+            return self.value - 22
+        else:
+            return self.value - 27
+
     def __str__(self) -> str:
-        return f"Week: {self.week}, {self.year}"
+        return f"Week: {self.value}, {self.year}"
 
 
 class Game(models.Model):
     week = models.ForeignKey(Week, on_delete=models.CASCADE, related_name="games")
     timestamp = models.DateTimeField()
+    event_id = models.PositiveIntegerField()
     home_team = models.ForeignKey(
         Team, on_delete=models.CASCADE, related_name="home_teams"
     )

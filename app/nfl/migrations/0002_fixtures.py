@@ -11,172 +11,172 @@ def forwards_func(apps, schema_editor):
     TeamRev.objects.using(db_alias).bulk_create([
         TeamRev(
             city=CityChoices.CHICAGO,
-            abbr=TeamChoices.BEARS,
+            id=TeamChoices.CHI,
             stadium=StadiumChoices.SF
         ),
         TeamRev(
             city=CityChoices.CINCINNATI,
-            abbr=TeamChoices.BENGALS,
+            id=TeamChoices.CIN,
             stadium=StadiumChoices.PBS
         ),
         TeamRev(
             city=CityChoices.ORCHARD_PARK,
-            abbr=TeamChoices.BILLS,
+            id=TeamChoices.BUF,
             stadium=StadiumChoices.NEF
         ),
         TeamRev(
             city=CityChoices.DENVER,
-            abbr=TeamChoices.BRONCOS,
+            id=TeamChoices.DEN,
             stadium=StadiumChoices.EF
         ),
         TeamRev(
             city=CityChoices.CLEVELAND,
-            abbr=TeamChoices.BROWNS,
+            id=TeamChoices.CLE,
             stadium=StadiumChoices.FES
         ),
         TeamRev(
             city=CityChoices.TAMPA,
-            abbr=TeamChoices.BUCCANEERS,
+            id=TeamChoices.TB,
             stadium=StadiumChoices.RJS
         ),
         TeamRev(
             city=CityChoices.GLENDALE,
-            abbr=TeamChoices.CARDINALS,
+            id=TeamChoices.ARI,
             stadium=StadiumChoices.SFS
         ),
         TeamRev(
             city=CityChoices.LOS_ANGELES,
-            abbr=TeamChoices.CHARGERS,
+            id=TeamChoices.LAC,
             stadium=StadiumChoices.DHSP
         ),
         TeamRev(
             city=CityChoices.KANSAS_CITY,
-            abbr=TeamChoices.CHIEFS,
+            id=TeamChoices.KC,
             stadium=StadiumChoices.AS
         ),
         TeamRev(
             city=CityChoices.INDIANAPOLIS,
-            abbr=TeamChoices.COLTS,
+            id=TeamChoices.IND,
             stadium=StadiumChoices.LOS
         ),
         TeamRev(
             city=CityChoices.IRVING,
-            abbr=TeamChoices.COWBOYS,
+            id=TeamChoices.DAL,
             stadium=StadiumChoices.ATS
         ),
         TeamRev(
             city=CityChoices.MIAMI,
-            abbr=TeamChoices.DOLPHINS,
+            id=TeamChoices.MIA,
             stadium=StadiumChoices.HRS
         ),
         TeamRev(
             city=CityChoices.PHILADELPHIA,
-            abbr=TeamChoices.EAGLES,
+            id=TeamChoices.PHI,
             stadium=StadiumChoices.LFF
         ),
         TeamRev(
             city=CityChoices.ATLANTA,
-            abbr=TeamChoices.FALCONS,
+            id=TeamChoices.ATL,
             stadium=StadiumChoices.MBS
         ),
         TeamRev(
             city=CityChoices.SAN_FRANCISCO,
-            abbr=TeamChoices.FOURTYNINERS,
+            id=TeamChoices.SF,
             stadium=StadiumChoices.LS
         ),
         TeamRev(
             city=CityChoices.EAST_RUTHERFORD,
-            abbr=TeamChoices.GIANTS,
+            id=TeamChoices.NYG,
             stadium=StadiumChoices.MLS
         ),
         TeamRev(
             city=CityChoices.JACKSONVILLE,
-            abbr=TeamChoices.JAGUARS,
+            id=TeamChoices.JAX,
             stadium=StadiumChoices.TBF
         ),
         TeamRev(
             city=CityChoices.EAST_RUTHERFORD,
-            abbr=TeamChoices.JETS,
+            id=TeamChoices.NYJ,
             stadium=StadiumChoices.MLS
         ),
         TeamRev(
             city=CityChoices.DETROIT,
-            abbr=TeamChoices.LIONS,
+            id=TeamChoices.DET,
             stadium=StadiumChoices.FF
         ),
         TeamRev(
             city=CityChoices.GREEN_BAY,
-            abbr=TeamChoices.PACKERS,
+            id=TeamChoices.GB,
             stadium=StadiumChoices.LF
         ),
         TeamRev(
             city=CityChoices.CHARLOTTE,
-            abbr=TeamChoices.PANTHERS,
+            id=TeamChoices.CAR,
             stadium=StadiumChoices.BAS
         ),
         TeamRev(
             city=CityChoices.FOXBOROUGH,
-            abbr=TeamChoices.PATRIOTS,
+            id=TeamChoices.NE,
             stadium=StadiumChoices.GS
         ),
         TeamRev(
             city=CityChoices.OAKLAND,
-            abbr=TeamChoices.RAIDERS,
+            id=TeamChoices.LV,
             stadium=StadiumChoices.RCC
         ),
         TeamRev(
             city=CityChoices.LOS_ANGELES,
-            abbr=TeamChoices.RAMS,
+            id=TeamChoices.LAR,
             stadium=StadiumChoices.LAMC
         ),
         TeamRev(
             city=CityChoices.BALTIMORE,
-            abbr=TeamChoices.RAVENS,
+            id=TeamChoices.BAL,
             stadium=StadiumChoices.MTBS
         ),
         TeamRev(
             city=CityChoices.LANDOVER,
-            abbr=TeamChoices.REDSKINS,
+            id=TeamChoices.WSH,
             stadium=StadiumChoices.FEF
         ),
         TeamRev(
             city=CityChoices.NEW_ORLEANS,
-            abbr=TeamChoices.SAINTS,
+            id=TeamChoices.NO,
             stadium=StadiumChoices.MBD
         ),
         TeamRev(
             city=CityChoices.SEATTLE,
-            abbr=TeamChoices.SEAHAWKS,
+            id=TeamChoices.SEA,
             stadium=StadiumChoices.CLF
         ),
         TeamRev(
             city=CityChoices.PITTSBURGH,
-            abbr=TeamChoices.STEELERS,
+            id=TeamChoices.PIT,
             stadium=StadiumChoices.HF
         ),
         TeamRev(
             city=CityChoices.HOUSTON,
-            abbr=TeamChoices.TEXANS,
+            id=TeamChoices.HOU,
             stadium=StadiumChoices.NRGS
         ),
         TeamRev(
             city=CityChoices.NASHVILLE,
-            abbr=TeamChoices.TITANS,
+            id=TeamChoices.TEN,
             stadium=StadiumChoices.NS
         ),
         TeamRev(
             city=CityChoices.MINNEAPOLIS,
-            abbr=TeamChoices.VIKINGS,
+            id=TeamChoices.MIN,
             stadium=StadiumChoices.USBS
         ),
         TeamRev(
             city=CityChoices.ORLANDO,
-            abbr=TeamChoices.AFC,
+            id=TeamChoices.AFC,
             stadium=StadiumChoices.CWS
         ),
         TeamRev(
             city=CityChoices.ORLANDO,
-            abbr=TeamChoices.NFC,
+            id=TeamChoices.NFC,
             stadium=StadiumChoices.CWS
         ),
     ])
