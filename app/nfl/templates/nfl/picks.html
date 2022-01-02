@@ -2,9 +2,83 @@
 
 {% block content %}
 <div class="container">
-    <div class="card">
+    {% if unpicked_games %}<div class="card bg-transparent">
         <div class="menu-bg card-header text-center">
-            <h2>{{ season_type }} {% trans 'picks of week' %} {{ week }}</h2>
+            <h2>{{ season_type }} {% trans 'Missing picks of week' %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}</h2>
+        </div>
+        <div class="bg-light-gray card-body">
+        <form action="/nfl/picks/" method="post">
+            {% csrf_token %}
+            <div class="card-deck">
+                <div class="card bg-light-gray text-right">
+                    <h4 class="card-header">{% trans 'Visitor Team' %}
+                </div>
+                <div class="card bg-light-gray text-center" style="max-width: 6rem;">
+                    <h4 class="card-header">{% trans 'Tie' %}
+                </div>
+                <div class="card bg-light-gray text-left">
+                    <h4 class="card-header">{% trans 'Home Team' %}
+                </div>
+            </div>
+            {% for game in unpicked_games %}
+            <div class="card-deck">
+                <div class="card bg-transparent text-right">
+                    <div class="card-body">
+                        <img class="float-left team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.visitor_team.short_name | lower }}.svg">
+                        <h5 class="card-title">{{ game.visitor_team.full_name }}</h5>
+                        {% with standings=game.visitor_team.standings %}
+                        <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
+                        {% endwith %}
+                    </div>
+                    <div class="card-footer row text-center m-0">
+                        <div class="col-10">
+                            <small>{{ game.timestamp }}</small>
+                        </div>
+                        <div class="col-2">
+                            <input type="radio" id="{{ game.id }}_{{ game.visitor_team.id }}" name="pick_{{ game.id }}" value="2_0">
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-transparent text-center" style="max-width: 6rem;">
+                    <div class="card-body">
+                    </div>
+                    <div class="card-footer">
+                        <input type="radio" id="{{ game.id }}_tie" name="pick_{{ game.id }}" value="3_0">
+                    </div>
+                </div>
+                <div class="card bg-transparent text-left">
+                    <div class="card-body">
+                        <img class="float-right team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.home_team.short_name | lower }}.svg">
+                        <h5 class="card-title">{{ game.home_team.full_name }}</h5>
+                        {% with standings=game.home_team.standings %}
+                        <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
+                        {% endwith %}
+                    </div>
+                    <div class="card-footer row text-center m-0">
+                        <div class="col-2">
+                            <input type="radio" id="{{ game.id }}_{{ game.home_team.id }}" name="pick_{{ game.id }}" value="1_0">
+                        </div>
+                        <div class="col-10">
+                            <small>{{ game.timestamp }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        <div class="card-footer row">
+            <div class="col-6 text-right">
+                <input type="submit" class="btn btn-primary" value="{% trans 'Submit picks' %}">
+            </div>
+            <div class="col-6">
+                <button class="btn btn-warning" type="button" onclick="resetPickForm()">{% trans 'Reset picks' %}</button>
+            </div>
+        </div>
+        </form>
+        </div>
+    </div>{% endif %}
+    <div class="card bg-transparent">
+        <div class="menu-bg card-header text-center">
+            <h2>{{ season_type }} {% trans 'Picks of week' %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}</h2>
         </div>
         <div class="bg-light-gray card-body">{% if picks %}
         <table class="table table-striped">
@@ -40,4 +114,15 @@
         {% endif %}</div>
     </div>
 </div>
+{% endblock %}
+
+{% block app_javascript %}
+<script>
+function resetPickForm() {
+    let tieRadioButtons = document.querySelectorAll("form input[type='radio']");
+    tieRadioButtons.forEach(rb => {
+        rb.checked = false;
+    });
+}
+</script>
 {% endblock %}
