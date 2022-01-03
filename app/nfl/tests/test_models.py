@@ -60,19 +60,19 @@ class TestGameModel:
 @pytest.mark.django_db
 class TestTeamModel:
     def test_full_name(self):
-        cur_team = Team.objects.get(abbr="CHI")
-        assert cur_team.full_name == TeamChoices("CHI").label
-        cur_team = Team.objects.get(abbr="TB")
-        assert cur_team.full_name == TeamChoices("TB").label
+        cur_team = Team.objects.get(id=TeamChoices.CHI)
+        assert cur_team.full_name == TeamChoices.CHI.label
+        cur_team = Team.objects.get(id=TeamChoices.TB)
+        assert cur_team.full_name == TeamChoices.TB.label
 
     def test_short_name(self):
-        cur_team = Team.objects.get(abbr="CHI")
+        cur_team = Team.objects.get(id=TeamChoices.CHI)
         assert cur_team.short_name == "Bears"
-        cur_team = Team.objects.get(abbr="TB")
+        cur_team = Team.objects.get(id=TeamChoices.TB)
         assert cur_team.short_name == "Buccaneers"
 
     def test_string(self):
-        cur_team = Team.objects.get(abbr="CHI")
+        cur_team = Team.objects.get(id=TeamChoices.CHI)
         assert str(cur_team) == "Chicago Bears"
 
 
