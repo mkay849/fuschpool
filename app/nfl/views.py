@@ -278,16 +278,37 @@ class PicksView(LoginRequiredMixin, WeekGamesMixin, ListView):
             picks = context.get(self.context_object_name)
             user_picks = picks.filter(user=self.request.user)
             picked_games = [pick.game for pick in user_picks]
+            now_dt = datetime.now(timezone.utc)
+            missed_games = list(
+                self.week_games.filter(timestamp__lte=now_dt).exclude(
+                    id__in=[g.id for g in picked_games]
+                )
+            )
+            overview_games = picked_games + missed_games
+            unpicked_games = list(
+                self.week_games.exclude(Q(id__in=[g.id for g in overview_games]))
+            )
             new_picks = {}
             for pick in picks:
-                new_picks[pick.user] = list(
-                    picks.filter(user=pick.user, game__in=picked_games)
-                )
+                try:
+                    new_picks[pick.user].append(pick)
+                except KeyError:
+                    new_picks[pick.user] = [pick]
+            if len(missed_games) or len(unpicked_games):
+                for idx, game in enumerate(self.week_games):
+                    if game in unpicked_games:
+                        for picks in new_picks.values():
+                            picks.insert(idx, None)
+                    elif game in missed_games:
+                        for picks in new_picks.values():
+                            picks.insert(
+                                idx,
+                                "missed"
+                                if picks[0].user == self.request.user
+                                else None,
+                            )
             context[self.context_object_name] = new_picks
-            now_dt = datetime.now(timezone.utc)
-            context["unpicked_games"] = self.week_games.exclude(
-                Q(id__in=[g.id for g in picked_games]) | Q(timestamp__lte=now_dt)
-            )
+            context["unpicked_games"] = unpicked_games
         return context
 
     def get_queryset(self):
