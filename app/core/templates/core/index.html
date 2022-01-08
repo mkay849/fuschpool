@@ -42,11 +42,11 @@
       <div class="container h-100">
         <div class="row align-items-center h-100">
           <div class="col-6 mx-auto">
-            <div class="card">
-              <div class="card-header">
+            <div class="bg-transparent card">
+              <div class="card-header menu-bg">
                 <h2 class="">Fuschpool pick'em pool</h2>
               </div>
-              <div class="card-body">
+              <div class="bg-light-gray card-body">
                 <form action='/login/', class="form" method="post">{% csrf_token %}
                   {% bootstrap_form form %}
                   {% buttons %}
