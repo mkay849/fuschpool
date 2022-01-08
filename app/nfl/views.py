@@ -44,7 +44,7 @@ class SeasonGamesMixin(WeekMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         season_games = self.season_games
-        cur_season_type = self.week.season_type
+        cur_season_type = self.week.season_type if self.week else SeasonType.OFF
         if cur_season_type == SeasonType.REGULAR:
             season_games = season_games.exclude(week__value__lt=5)
         elif cur_season_type == SeasonType.POST:
@@ -56,11 +56,12 @@ class SeasonGamesMixin(WeekMixin):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        self.season_games = Game.objects.filter(
-            final=True,
-            week__year__value=self.week.year.value,
-            week__value__lte=self.week.value,
-        )
+        if self.week:
+            self.season_games = Game.objects.filter(
+                final=True,
+                week__year__value=self.week.year.value,
+                week__value__lte=self.week.value,
+            )
 
 
 class WeekGamesMixin(WeekMixin):
@@ -73,9 +74,10 @@ class WeekGamesMixin(WeekMixin):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        self.week_games = Game.objects.filter(week=self.week).order_by(
-            "timestamp", "home_team"
-        )
+        if self.week:
+            self.week_games = Game.objects.filter(week=self.week).order_by(
+                "timestamp", "home_team"
+            )
 
 
 class TeamsMixin(object):
@@ -95,56 +97,59 @@ class SeasonStandingsMixin(SeasonGamesMixin, TeamsMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         verbose_teams = []
-        for team in context["teams"]:
-            season_team_games = context.get("season_games").filter(
-                Q(home_team=team.id) | Q(visitor_team=team.id),
-            )
-            season_game_agg = season_team_games.aggregate(
-                won=Count(
-                    "id",
-                    filter=Q(
-                        home_team=team.id, home_team_score__gt=F("visitor_team_score")
-                    ),
+        if self.teams and self.season_games:
+            for team in self.teams:
+                season_team_games = self.season_games.filter(
+                    Q(home_team=team.id) | Q(visitor_team=team.id),
                 )
-                + Count(
-                    "id",
-                    filter=Q(
-                        visitor_team=team.id,
-                        visitor_team_score__gt=F("home_team_score"),
+                season_game_agg = season_team_games.aggregate(
+                    won=Count(
+                        "id",
+                        filter=Q(
+                            home_team=team.id,
+                            home_team_score__gt=F("visitor_team_score"),
+                        ),
+                    )
+                    + Count(
+                        "id",
+                        filter=Q(
+                            visitor_team=team.id,
+                            visitor_team_score__gt=F("home_team_score"),
+                        ),
                     ),
-                ),
-                lost=Count(
-                    "id",
-                    filter=Q(
-                        home_team=team.id, home_team_score__lt=F("visitor_team_score"),
+                    lost=Count(
+                        "id",
+                        filter=Q(
+                            home_team=team.id,
+                            home_team_score__lt=F("visitor_team_score"),
+                        ),
+                    )
+                    + Count(
+                        "id",
+                        filter=Q(
+                            visitor_team=team.id,
+                            visitor_team_score__lt=F("home_team_score"),
+                        ),
                     ),
+                    tie=Count("id", filter=Q(home_team_score=F("visitor_team_score"))),
                 )
-                + Count(
-                    "id",
-                    filter=Q(
-                        visitor_team=team.id,
-                        visitor_team_score__lt=F("home_team_score"),
-                    ),
-                ),
-                tie=Count("id", filter=Q(home_team_score=F("visitor_team_score"))),
-            )
-            if season_game_agg.get("won") or season_game_agg.get("lost"):
-                won_lost_ratio = 1 - season_game_agg.get("lost") / float(
-                    season_game_agg.get("won") + season_game_agg.get("lost")
+                if season_game_agg.get("won") or season_game_agg.get("lost"):
+                    won_lost_ratio = 1 - season_game_agg.get("lost") / float(
+                        season_game_agg.get("won") + season_game_agg.get("lost")
+                    )
+                else:
+                    won_lost_ratio = 0
+                verbose_teams.append(
+                    {
+                        "db_team": team,
+                        "city": CityChoices(team.city).label,
+                        "stadium": StadiumChoices(team.stadium).label,
+                        "won": season_game_agg.get("won") or 0,
+                        "lost": season_game_agg.get("lost") or 0,
+                        "tie": season_game_agg.get("tie") or 0,
+                        "won_lost_ratio": won_lost_ratio,
+                    }
                 )
-            else:
-                won_lost_ratio = 0
-            verbose_teams.append(
-                {
-                    "db_team": team,
-                    "city": CityChoices(team.city).label,
-                    "stadium": StadiumChoices(team.stadium).label,
-                    "won": season_game_agg.get("won") or 0,
-                    "lost": season_game_agg.get("lost") or 0,
-                    "tie": season_game_agg.get("tie") or 0,
-                    "won_lost_ratio": won_lost_ratio,
-                }
-            )
         context.update(
             {
                 "verbose_teams": sorted(
@@ -274,7 +279,7 @@ class PicksView(LoginRequiredMixin, WeekGamesMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.context_object_name in context:
+        if self.week_games and self.context_object_name in context:
             picks = context.get(self.context_object_name)
             user_picks = picks.filter(user=self.request.user)
             picked_games = [pick.game for pick in user_picks]
@@ -313,7 +318,7 @@ class PicksView(LoginRequiredMixin, WeekGamesMixin, ListView):
 
     def get_queryset(self):
         try:
-            if self.week_games.exists():
+            if self.week_games and self.week_games.exists():
                 return Pick.objects.filter(game__in=self.week_games).order_by(
                     "user__first_name", "game__timestamp", "game__home_team",
                 )

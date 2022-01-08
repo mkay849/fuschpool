@@ -6,7 +6,7 @@
         <div class="menu-bg card-header text-center">
             <h2>{% trans 'Teams' %} {{ season }}</h2>
         </div>
-        <div class="bg-light-gray card-body">{% if teams %}
+        <div class="bg-light-gray card-body">{% if teams and verbose_teams %}
             <h4 class="card-title text-center">{% if nfl_week > 1 and nfl_week < 23 %}{% trans 'Week' %} {{ week }} of {{ season_type }}{% else %}{{ season_type }}{% endif %}</h4>
             <table class="table table-striped">
             <thead>
@@ -38,7 +38,7 @@
                 {% endfor %}
             <tbody>
         </table>{% else %}
-        <p class="card-text">{% trans 'There are no teams imported, yet' %}<p>
+        <p class="card-text">{% trans 'There are no team stats imported, yet' %}<p>
         {% endif %}</div>
     </div>
 {% endblock %}
