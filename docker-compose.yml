@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+    app:
+        env_file: .env
+        environment:
+            - DEBUG=True
+        image: marcelkonrad/fuschpool
+        labels:
+            - "traefik.enable=true"
+            - "traefik.backend=fuschpool"
+            - "traefik.frontend.rule=Host:fuschpool.koma84.de"
+            - "traefik.docker.network=web"
+        networks:
+            - mysql
+            - web
+        ports:
+            - "80:8000"
+        restart: "unless-stopped"
+
+networks:
+    web:
+        external: true
+    mysql:
+        external: true
