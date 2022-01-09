@@ -15,6 +15,7 @@ logger = logging.getLogger("EspnApiClient")
 
 class EspnApiClient(object):
     api_base_url = "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl"
+    httpx_limits = httpx.Limits(max_keepalive_connections=2, max_connections=5)
     dt_format_str = "%Y-%m-%dT%H:%M%z"
 
     def __init__(self):
@@ -47,16 +48,16 @@ class EspnApiClient(object):
         except Game.DoesNotExist:
             missing_games = Game.objects.none()
         if missing_games.exists():
-            return self.loop.run_until_complete(
-                self.check_games_async(list(missing_games))
-            )
+            missing_games = list(missing_games)
+            logger.info(f"Trying to update {len(missing_games)}")
+            return self.loop.run_until_complete(self.check_games_async(missing_games))
         logger.info("There were no games to update")
         return []
 
     async def check_games_async(self, missing_games: List[Game]) -> List[Game]:
         """Check all started but not final games or a given list of event ids asynchronously and update the database"""
         updated_games = []
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(limits=self.httpx_limits) as client:
             for game in missing_games:
                 event_url = f"{self.api_base_url}/events/{game.event_id}/competitions/{game.event_id}/competitors"
                 event = await client.get(event_url)
@@ -92,69 +93,52 @@ class EspnApiClient(object):
 
     def import_games(self) -> List[Game]:
         try:
-            missing_weeks = Week.objects.filter(games__isnull=True)
+            missing_weeks = Week.objects.filter(games__isnull=True).select_related(
+                "year"
+            )
         except Week.DoesNotExist:
             missing_weeks = Week.objects.none()
-        week_ids = []
-        for w in missing_weeks:
-            week_ids.append(w.id)
         res = []
-        if len(week_ids):
+        if missing_weeks.exists():
+            missing_weeks = list(missing_weeks)
             gather_res = self.loop.run_until_complete(
                 asyncio.gather(
-                    *[self.import_games_async(week_id) for week_id in week_ids]
+                    *[self.import_games_async(week) for week in missing_weeks]
                 )
             )
             for gr in gather_res:
                 res.extend(gr)
         return res
 
-    async def import_games_async(self, week_id: int) -> List[Game]:
+    async def import_games_async(self, week_object: Week) -> List[Game]:
         games = []
 
-        week_object = await sync_to_async(Week.objects.select_related("year").get)(
-            id=week_id
-        )
         season = week_object.year.value
         season_type = week_object.season_type
         week = week_object.nfl_week
 
         events_url = f"{self.api_base_url}/seasons/{season}/types/{season_type}/weeks/{week}/events"
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(limits=self.httpx_limits) as client:
             events_res = await client.get(events_url)
-            events_json = events_res.json()
             if events_res.status_code != 200:
                 logger.warning(
-                    f"Could not query list of events for season={season} season_type={season_type} week={week}: {events_json}"
+                    f"Could not query list of events for season={season} season_type={season_type} week={week}: {events_res.reason}"
                 )
                 return []
+            events_json = events_res.json()
             for event in events_json["items"]:
                 event_res = await client.get(event["$ref"])
-                event_json = event_res.json()
                 if event_res.status_code != 200:
-                    logger.warning(f"Could not query event: {event_json}")
+                    logger.warning(f"Could not query event: {event_res.reason}")
                     continue
+                event_json = event_res.json()
                 competitors = event_json["competitions"][0]["competitors"]
-                if competitors[0]["homeAway"] == "home":
-                    home_team = competitors[0]
-                    visitor_team = competitors[1]
-                else:
-                    home_team = competitors[1]
-                    visitor_team = competitors[0]
-                if int(home_team["id"]) < 1 or int(visitor_team["id"]) < 1:
+                comp_res = await self._process_competitors(competitors, client)
+                if comp_res is None:
                     logger.info(
                         f"Teams unknown for game on {event_json['date']}. Skipping..."
                     )
                     continue
-                home_score = None
-                visitor_score = None
-                if "score" in home_team:
-                    home_score_res = await client.get(home_team["score"]["$ref"])
-                    home_score = home_score_res.json()
-                if "score" in visitor_team:
-                    visitor_score_res = await client.get(visitor_team["score"]["$ref"])
-                    visitor_score = visitor_score_res.json()
-                final = home_score and "winner" in home_score
                 event_timestamp = datetime.strptime(
                     event_json["date"], self.dt_format_str
                 )
@@ -162,15 +146,17 @@ class EspnApiClient(object):
                     Game,
                     event_id=event_json["id"],
                     defaults={
-                        "week_id": week_id,
+                        "week_id": week_object.id,
                         "timestamp": event_timestamp,
-                        "home_team_id": home_team["id"],
-                        "home_team_score": home_score["value"] if home_score else None,
-                        "visitor_team_id": visitor_team["id"],
-                        "visitor_team_score": visitor_score["value"]
-                        if visitor_score
+                        "home_team_id": comp_res["home"]["team_id"],
+                        "home_team_score": comp_res["home"]["score"]
+                        if comp_res["home"]["score"]
                         else None,
-                        "final": final,
+                        "visitor_team_id": comp_res["visitor"]["team_id"],
+                        "visitor_team_score": comp_res["visitor"]["score"]
+                        if comp_res["visitor"]["score"]
+                        else None,
+                        "final": comp_res["final"],
                     },
                 )
                 games.append(cur_game)
@@ -190,10 +176,10 @@ class EspnApiClient(object):
         else:
             cur_year = season
         year_url = f"{self.api_base_url}/seasons/{cur_year}"
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(limits=self.httpx_limits) as client:
             year_res = await client.get(year_url)
             if year_res.status_code != 200:
-                logger.warning(f"Could not get season {cur_year}: {year_res.json()}")
+                logger.warning(f"Could not get season {cur_year}: {year_res.reason}")
                 return []
             yjson = year_res.json()
             year_dt_start = datetime.strptime(yjson["startDate"], self.dt_format_str)
@@ -206,19 +192,26 @@ class EspnApiClient(object):
                     "end_timestamp": year_dt_end,
                 },
             )
+            pre_season_weeks = regular_season_weeks = post_season_weeks = 0
             for season in yjson["types"]["items"]:
                 weeks_url = f"{year_url}/types/{season['type']}/weeks"
                 weeks_res = await client.get(weeks_url)
                 if weeks_res.status_code != 200:
                     logger.warning(
-                        f"Could not query season type {SeasonType(season['type']).label}: {weeks_res.json()}"
+                        f"Could not query season type {SeasonType(season['type']).label}: {weeks_res.reason}"
                     )
                     continue
                 weeks_json = weeks_res.json()
+                if season["type"] == 1:
+                    pre_season_weeks = len(weeks_json["items"])
+                elif season["type"] == 2:
+                    regular_season_weeks = len(weeks_json["items"])
+                elif season["type"] == 3:
+                    post_season_weeks = len(weeks_json["items"])
                 for week in weeks_json["items"]:
                     week_res = await client.get(week["$ref"])
                     if week_res.status_code != 200:
-                        logger.warning(f"Could not query week: {week_res.json()}")
+                        logger.warning(f"Could not query week: {week_res.reason}")
                         continue
                     week_json = week_res.json()
                     week_dt_start = datetime.strptime(
@@ -229,11 +222,13 @@ class EspnApiClient(object):
                     )
                     real_week = week_json["number"]
                     if season["type"] == 2:
-                        real_week += 4
+                        real_week += pre_season_weeks
                     elif season["type"] == 3:
-                        real_week += 22
+                        real_week += pre_season_weeks + regular_season_weeks
                     elif season["type"] == 4:
-                        real_week += 27
+                        real_week += (
+                            pre_season_weeks + regular_season_weeks + post_season_weeks
+                        )
                     cur_week = await self._get_or_create(
                         Week,
                         value=real_week,
