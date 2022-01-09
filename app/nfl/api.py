@@ -1,8 +1,8 @@
 import asyncio
-import logging
-from datetime import date, datetime
 import httpx
-from typing import List
+import logging
+from datetime import date, datetime, timezone
+from typing import Any, Dict, List, Optional
 
 from asgiref.sync import sync_to_async
 from django.db.models.base import Model
@@ -14,8 +14,6 @@ logger = logging.getLogger("EspnApiClient")
 
 
 class EspnApiClient(object):
-    """https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20211212"""
-
     api_base_url = "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl"
     dt_format_str = "%Y-%m-%dT%H:%M%z"
 
@@ -37,6 +35,60 @@ class EspnApiClient(object):
             if len(updated_fields):
                 cur_object.save(update_fields=updated_fields)
         return cur_object
+
+    def check_games(self, event_ids: List[int] = None) -> List[Game]:
+        """Check all started but not final games or a given list of event ids and update the database"""
+        try:
+            if event_ids is None:
+                not_ts = datetime.now(timezone.utc)
+                missing_games = Game.objects.filter(timestamp__lt=not_ts, final=False)
+            else:
+                missing_games = Game.objects.filter(event_id__in=event_ids)
+        except Game.DoesNotExist:
+            missing_games = Game.objects.none()
+        if missing_games.exists():
+            return self.loop.run_until_complete(
+                self.check_games_async(list(missing_games))
+            )
+        logger.info("There were no games to update")
+        return []
+
+    async def check_games_async(self, missing_games: List[Game]) -> List[Game]:
+        """Check all started but not final games or a given list of event ids asynchronously and update the database"""
+        updated_games = []
+        async with httpx.AsyncClient() as client:
+            for game in missing_games:
+                event_url = f"{self.api_base_url}/events/{game.event_id}/competitions/{game.event_id}/competitors"
+                event = await client.get(event_url)
+                if event.status_code != 200:
+                    continue
+                event_json = event.json()
+                if competitors := event_json.get("items"):
+                    comp_res = await self._process_competitors(competitors, client)
+                    if comp_res is None:
+                        logger.info(
+                            f"Teams unknown for game on {event_json['date']}. Skipping..."
+                        )
+                        continue
+                    updated = False
+                    if game.final != comp_res["final"]:
+                        game.final = comp_res["final"]
+                        updated = True
+                    cur_score = comp_res["home"]["score"]
+                    if cur_score and game.home_team_score != cur_score:
+                        game.home_team_score = cur_score
+                        updated = True
+                    cur_score = comp_res["visitor"]["score"]
+                    if cur_score and game.visitor_team_score != cur_score:
+                        game.visitor_team_score = cur_score
+                        updated = True
+                    if updated:
+                        updated_games.append(game)
+        if len(updated_games):
+            await sync_to_async(Game.objects.bulk_update)(
+                updated_games, ["final", "home_team_score", "visitor_team_score"]
+            )
+        return updated_games
 
     def import_games(self) -> List[Game]:
         try:
@@ -193,3 +245,37 @@ class EspnApiClient(object):
                     )
                     season_weeks.append(cur_week)
         return season_weeks
+
+    async def _process_competitors(
+        self, competitors: List[Dict[str, Any]], client: httpx.AsyncClient
+    ) -> Optional[Dict[str, Any]]:
+        res = {
+            "home": {"score": None, "team_id": None},
+            "visitor": {"score": None, "team_id": None},
+            "final": False,
+        }
+        if competitors[0]["homeAway"] == "home":
+            home_team = competitors[0]
+            visitor_team = competitors[1]
+        else:
+            home_team = competitors[1]
+            visitor_team = competitors[0]
+        if int(home_team["id"]) < 1 or int(visitor_team["id"]) < 1:
+            return None
+        home_score = None
+        visitor_score = None
+        if "score" in home_team:
+            home_score_res = await client.get(home_team["score"]["$ref"])
+            home_score = home_score_res.json()
+        if "score" in visitor_team:
+            visitor_score_res = await client.get(visitor_team["score"]["$ref"])
+            visitor_score = visitor_score_res.json()
+        final = home_score and "winner" in home_score
+        res["home"].update(
+            {"team_id": home_team["id"], "score": home_score.get("value")}
+        )
+        res["visitor"].update(
+            {"team_id": visitor_team["id"], "score": visitor_score.get("value")}
+        )
+        res.update({"final": final})
+        return res
