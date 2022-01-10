@@ -18,8 +18,14 @@ class EspnApiClient(object):
     httpx_limits = httpx.Limits(max_keepalive_connections=2, max_connections=5)
     dt_format_str = "%Y-%m-%dT%H:%M%z"
 
-    def __init__(self):
-        self.loop = asyncio.get_event_loop()
+    def __init__(self, loop=None):
+        if loop is None:
+            try:
+                self.loop = asyncio.get_running_loop()
+            except RuntimeError:
+                self.loop = asyncio.new_event_loop()
+        else:
+            self.loop = loop
 
     @sync_to_async
     def _get_or_create(self, object_class: Model, **kwargs):
