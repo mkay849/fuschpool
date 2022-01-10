@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "bootstrap4",
     "core",
+    "django_apscheduler",
     "nfl",
+    "pick_pool.apps.PickPoolConfig",
 ]
 
 MIDDLEWARE = [
