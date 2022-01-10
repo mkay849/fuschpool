@@ -1,7 +1,7 @@
 {% extends 'nfl/index.html' %}{% load i18n static %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     {% if unpicked_games %}<div class="card bg-transparent">
         <div class="menu-bg card-header text-center">
             <h2>{{ season_type }} {% trans 'Missing picks of week' %}{% if week %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
@@ -84,20 +84,24 @@
         <table class="table table-striped">
             <thead>
                 <tr class="justify-content-center">
-                    <th class="align-middle" scope="col">{% trans 'Player' %}</th>{% for game in week_games %}
+                    <th class="align-middle" scope="col">{% trans 'Player' %}</th>
+                    <th scope="col"><small>Away<br><br>Home</small></th>{% for game in week_games %}
                     <th scope="col">
                         <img class="team-logo-small" alt="{{ game.visitor_team.full_name }}" src="{% static 'nfl/img/logos/' %}{{ game.visitor_team.short_name | lower }}.svg" title="{{ game.visitor_team.full_name }}">
                         <br>{% trans 'at' %}<br>
                         <img class="team-logo-small" alt="{{ game.home_team.full_name }}" src="{% static 'nfl/img/logos/' %}{{ game.home_team.short_name | lower }}.svg" title="{{ game.home_team.full_name }}">
                     </th>{% endfor %}
                     <th class="align-middle" scope="col">{% trans 'TB' %}</th>
+                    <th class="align-middle" scope="col">Wins</th>
+                    <th class="align-middle" scope="col">Season</th>
                 </tr>
             </thead>
             <tbody>
-                {% for player, picks in picks.items %}
+                {% for player, res_dict in picks.items %}
                 <tr>
                     <td>{{ player.first_name }}</td>
-                    {% for pick in picks %}
+                    <td></td>
+                    {% for pick in res_dict.picks %}
                     {% if pick is None %}
                         <td><img class="team-logo-small" alt="{% trans 'Unpicked game' %}" title="{% trans 'Unpicked game' %}" src="{% static 'nfl/img/' %}question-mark.svg"></td>
                     {% elif pick == "missed" %}
@@ -108,8 +112,13 @@
                         {% if pick.game.winner == 2 %}<td class="bg-success">{% else %}<td>{% endif %}<img class="team-logo-small" alt="{{ pick.game.visitor_team.full_name }}" title="{{ pick.game.visitor_team.full_name }}" src="{% static 'nfl/img/logos/' %}{{ pick.game.visitor_team.short_name | lower }}.svg"></td>
                     {% else %}
                         {% if pick.game.winner == 3 %}<td class="bg-success">{% else %}<td>{% endif %}{% trans 'Tie' %}</td>
-                    {% endif %}{% if pick.picked_tie_break %}<td>{{ pick.picked_tie_break }}</td>{% endif %}
+                    {% endif %}
                     {% endfor %}
+                    {% with res_dict.picks|last as last_pick %}
+                        <td class="text-center">{{ last_pick.picked_tie_break }}</td>
+                    {% endwith %}
+                    <td class="text-center">{{ res_dict.score }}</td>
+                    <td class="text-center">{{ res_dict.season }}</td>
                 </tr>
                 {% endfor %}
             <tbody>

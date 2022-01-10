@@ -28,7 +28,7 @@
         <span class="nav-item"><a class="btn btn-primary nav-link" href="{% url 'core:profile' %}">{% trans 'Profile' %}</a></span>
         <span class="nav-item"><a class="btn btn-primary nav-link" href="{% url 'core:logout' %}">{% trans 'Logout' %}</a></span>
       </nav>
-      <div class="container pb-5">
+      <div class="container-fluid pb-5">
           <div class="row">{% bootstrap_messages %}</div>
           <div class="row">{% block content %}{% endblock %}</div>
         </div>

@@ -296,22 +296,28 @@ class PicksView(LoginRequiredMixin, WeekGamesMixin, ListView):
             new_picks = {}
             for pick in picks:
                 try:
-                    new_picks[pick.user].append(pick)
+                    new_picks[pick.user]["picks"].append(pick)
                 except KeyError:
-                    new_picks[pick.user] = [pick]
+                    new_picks[pick.user] = {"picks": [pick], "score": 0, "season": 0}
+                if pick.game.winner and pick.selection == pick.game.winner:
+                    new_picks[pick.user]["score"] += 1
+            for idx, game in enumerate(self.week_games):
+                for user, picks in new_picks.items():
+                    if game not in [
+                        p.game if isinstance(p, Pick) else p for p in picks["picks"]
+                    ]:
+                        picks["picks"].insert(
+                            idx, "missed"
+                        ) if game.timestamp < now_dt else picks["picks"].insert(
+                            idx, None
+                        )
             if len(missed_games) or len(unpicked_games):
                 for idx, game in enumerate(self.week_games):
-                    if game in unpicked_games:
-                        for picks in new_picks.values():
-                            picks.insert(idx, None)
-                    elif game in missed_games:
-                        for picks in new_picks.values():
-                            picks.insert(
-                                idx,
-                                "missed"
-                                if picks[0].user == self.request.user
-                                else None,
-                            )
+                    if game in unpicked_games + missed_games:
+                        for user, picks in new_picks.items():
+                            if user == self.request.user:
+                                continue
+                            picks["picks"][idx] = None
             context[self.context_object_name] = new_picks
             context["unpicked_games"] = unpicked_games
         return context
