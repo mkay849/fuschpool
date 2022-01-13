@@ -130,3 +130,5 @@ dmypy.json
 .pyre/
 
 .vscode/
+
+app/core/fixtures/core_users.jsonl
