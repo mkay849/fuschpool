@@ -1,9 +1,9 @@
 import asyncio
-import httpx
 import logging
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 
+import httpx
 from asgiref.sync import sync_to_async
 from django.db.models.base import Model
 
@@ -48,7 +48,9 @@ class EspnApiClient(object):
         try:
             if event_ids is None:
                 now_ts = datetime.now(timezone.utc)
-                missing_games = Game.objects.filter(timestamp__lt=now_ts, final=False)
+                missing_games = Game.objects.filter(
+                    timestamp__range=[now_ts - timedelta(days=14), now_ts], final=False
+                )
             else:
                 missing_games = Game.objects.filter(event_id__in=event_ids)
         except Game.DoesNotExist:
