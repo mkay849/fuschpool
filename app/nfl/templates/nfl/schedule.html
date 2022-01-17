@@ -18,24 +18,32 @@
             {% for game in week_games %}
             <div class="card-deck">
                 <div class="card bg-transparent text-right">
-                    <div class="card-body">
-                        <img class="float-left team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.visitor_team.short_name | lower }}.svg">
-                        <h5 class="card-title">{{ game.visitor_team.full_name }}</h5>
-                        {% with standings=game.visitor_team.standings %}
-                        <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
-                        {% endwith %}
+                    <div class="card-body d-flex justify-content-between">{% if game.visitor_team %}
+                        <img class="team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.visitor_team.short_name | lower }}.svg">
+                        <h2 class="align-self-center card-title">{% if game.visitor_team_score %}{{ game.visitor_team_score }}{% else %}0{% endif %}</h2>
+                        <span>
+                            <h5 class="card-title">{{ game.visitor_team.full_name }}</h5>
+                            {% with standings=game.visitor_team.standings %}
+                            <br><p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
+                            {% endwith %}
+                        </span>{% else %}
+                        <td><img class="team-logo-small" alt="{% trans 'Unknown Team' %}" title="{% trans 'TBA' %}" src="{% static 'nfl/img/' %}question-mark.svg"></td>{% endif %}
                     </div>
                     <div class="card-footer text-center">
                         <small>{{ game.timestamp }}</small>
                     </div>
                 </div>
                 <div class="card bg-transparent text-left">
-                    <div class="card-body">
-                        <img class="float-right team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.home_team.short_name | lower }}.svg">
-                        <h5 class="card-title">{{ game.home_team.full_name }}</h5>
-                        {% with standings=game.home_team.standings %}
-                        <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
-                        {% endwith %}
+                    <div class="card-body d-flex justify-content-between">{% if game.home_team %}
+                        <img class="team-logo-2x" src="{% static 'nfl/img/logos/' %}{{ game.home_team.short_name | lower }}.svg">
+                        <h2 class="align-self-center card-title">{% if game.home_team_score %}{{ game.home_team_score }}{% else %}0{% endif %}</h2>
+                        <span>
+                            <h5 class="card-title">{{ game.home_team.full_name }}</h5>
+                            {% with standings=game.home_team.standings %}
+                            <p class="card-text">({{ standings.0 }}-{{ standings.1 }}-{{ standings.2 }})</p>
+                            {% endwith %}
+                        </span>{% else %}
+                        <td><img class="team-logo-small" alt="{% trans 'Unknown Team' %}" title="{% trans 'TBA' %}" src="{% static 'nfl/img/' %}question-mark.svg"></td>{% endif %}
                     </div>
                     <div class="card-footer text-center">
                         <small>{{ game.timestamp }}</small>
