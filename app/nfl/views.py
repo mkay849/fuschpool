@@ -1,13 +1,20 @@
-from datetime import date, datetime, time, timezone
 import logging
+from datetime import date, datetime, time, timezone
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F, Q
 from django.db.models.aggregates import Count, Sum
 from django.db.models.functions import Coalesce
 from django.views.generic import ListView, TemplateView
 
-from nfl.defines import CityChoices, SeasonType, StadiumChoices, TeamChoices
+from nfl.defines import (
+    CityChoices,
+    PickChoices,
+    SeasonType,
+    StadiumChoices,
+    TeamChoices,
+)
 from nfl.models import Game, Pick, Team, Week
 
 logger = logging.getLogger(__name__)
@@ -249,7 +256,45 @@ class StandingsView(LoginRequiredMixin, WeekMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({"standings": None})
+        standings = {}
+        pick_pool_user = get_user_model()
+        for player in pick_pool_user.objects.all():
+            season_picks = Pick.objects.filter(
+                user=player, game__week__year=self.week.year, game__final=True
+            )
+            won = season_picks.filter(
+                Q(
+                    game__visitor_team_score__gt=F("game__home_team_score"),
+                    selection=PickChoices.VISITOR_TEAM,
+                )
+                | Q(
+                    game__home_team_score__gt=F("game__visitor_team_score"),
+                    selection=PickChoices.HOME_TEAM,
+                )
+            ).count()
+            lost = season_picks.filter(
+                Q(
+                    game__visitor_team_score__gt=F("game__home_team_score"),
+                    selection=PickChoices.HOME_TEAM,
+                )
+                | Q(
+                    game__home_team_score__gt=F("game__visitor_team_score"),
+                    selection=PickChoices.VISITOR_TEAM,
+                )
+            ).count()
+            tie = season_picks.filter(
+                Q(
+                    game__visitor_team_score=F("game__home_team_score"),
+                    selection=PickChoices.TIED_GAME,
+                )
+            ).count()
+            standings[player] = {
+                "won": won,
+                "lost": lost,
+                "tie": tie,
+                "won_lost_ratio": won / (won + lost + tie) if won or lost or tie else 0,
+            }
+        context.update({"standings": standings})
         return context
 
 

@@ -6,7 +6,7 @@
         <div class="menu-bg card-header text-center">
             <h2>{% trans 'Status of the season' %} {{ season }}</h2>
         </div>
-        <div class="bg-light-gray card-body">{% if players %}
+        <div class="bg-light-gray card-body">{% if standings %}
             <table class="table table-striped">
             <thead>
                 <tr class="justify-content-center">
@@ -16,11 +16,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for player in players %}
+                {% for player, ps in standings.items %}
                 <tr>
-                    <td>{{ team.full_name }}</td>
-                    <td>{{ team.won }} - {{ team.lost }} - {{ team.tie }}</td>
-                    <td>{{ team.won_lost_ratio | floatformat:3 }}</td>
+                    <td>{{ player.first_name }}</td>
+                    <td>{{ ps.won }} - {{ ps.lost }} - {{ ps.tie }}</td>
+                    <td>{{ ps.won_lost_ratio | floatformat:3 }}</td>
                 </tr>
                 {% endfor %}
             <tbody>
