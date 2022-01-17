@@ -4,7 +4,7 @@
 <div class="container-fluid">
     {% if unpicked_games %}<div class="card bg-transparent">
         <div class="menu-bg card-header text-center">
-            <h2>{{ season_type }} {% trans 'Missing picks of week' %}{% if week %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
+            <h2>{{ season_type }} {% trans 'Missing picks of week' %}{% if week %} {{ week.value | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
         </div>
         <div class="bg-light-gray card-body">
         <form action="/nfl/picks/" method="post">
@@ -78,7 +78,7 @@
     </div>{% endif %}
     <div class="card bg-transparent pt-3">
         <div class="menu-bg card-header text-center">
-            <h2>{{ season_type }} {% trans 'Picks of week' %}{% if week %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
+            <h2>{{ season_type }} {% trans 'Picks of week' %}{% if week %} {{ week.value | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
         </div>
         <div class="bg-light-gray card-body">{% if picks %}
         <table class="table table-striped">

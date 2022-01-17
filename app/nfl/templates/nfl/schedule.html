@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card bg-transparent">
         <div class="menu-bg card-header text-center">
-            <h2>{% trans 'Games of week' %}{% if week %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
+            <h2>{% trans 'Games of week' %}{% if week %} {{ week.value | stringformat:'02d' }} / {{ week.year.value }}{% endif %}</h2>
         </div>
         <div class="bg-light-gray card-body">{% if week_games %}
             <div class="card-deck">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             {% endfor %}{% else %}
-        <p class="card-text">{% trans 'There are no games for week' %} {{ week.nfl_week | stringformat:'02d' }} / {{ week.year.value }}<p>
+        <p class="card-text">{% trans 'There are no games for week' %} {{ week.value | stringformat:'02d' }} / {{ week.year.value }}<p>
         {% endif %}</div>
     </div>
 {% endblock %}
