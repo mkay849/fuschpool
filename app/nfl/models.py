@@ -220,11 +220,19 @@ class Game(models.Model):
     timestamp = models.DateTimeField()
     event_id = models.PositiveIntegerField()
     home_team = models.ForeignKey(
-        Team, on_delete=models.CASCADE, related_name="home_teams"
+        Team,
+        on_delete=models.CASCADE,
+        related_name="home_teams",
+        null=True,
+        default=None,
     )
     home_team_score = models.PositiveSmallIntegerField(null=True, default=None)
     visitor_team = models.ForeignKey(
-        Team, on_delete=models.CASCADE, related_name="visitor_teams"
+        Team,
+        on_delete=models.CASCADE,
+        related_name="visitor_teams",
+        null=True,
+        default=None,
     )
     visitor_team_score = models.PositiveSmallIntegerField(null=True, default=None)
     final = models.BooleanField(default=False)

@@ -47,8 +47,8 @@ class EspnApiClient(object):
         """Check all started but not final games or a given list of event ids and update the database"""
         try:
             if event_ids is None:
-                not_ts = datetime.now(timezone.utc)
-                missing_games = Game.objects.filter(timestamp__lt=not_ts, final=False)
+                now_ts = datetime.now(timezone.utc)
+                missing_games = Game.objects.filter(timestamp__lt=now_ts, final=False)
             else:
                 missing_games = Game.objects.filter(event_id__in=event_ids)
         except Game.DoesNotExist:
@@ -140,11 +140,6 @@ class EspnApiClient(object):
                 event_json = event_res.json()
                 competitors = event_json["competitions"][0]["competitors"]
                 comp_res = await self._process_competitors(competitors, client)
-                if comp_res is None:
-                    logger.info(
-                        f"Teams unknown for game on {event_json['date']}. Skipping..."
-                    )
-                    continue
                 event_timestamp = datetime.strptime(
                     event_json["date"], self.dt_format_str
                 )
@@ -261,8 +256,10 @@ class EspnApiClient(object):
         else:
             home_team = competitors[1]
             visitor_team = competitors[0]
-        if int(home_team["id"]) < 1 or int(visitor_team["id"]) < 1:
-            return None
+        if int(home_team["id"]) < 1:
+            home_team["id"] = None
+        if int(visitor_team["id"]) < 1:
+            visitor_team["id"] = None
         home_score = None
         visitor_score = None
         if "score" in home_team:
