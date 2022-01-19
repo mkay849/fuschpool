@@ -3,8 +3,6 @@ version: '3.9'
 services:
     app:
         env_file: .env
-        environment:
-            - DEBUG=True
         image: marcelkonrad/fuschpool
         labels:
             - "traefik.enable=true"
@@ -16,6 +14,21 @@ services:
             - web
         ports:
             - "80:8000"
+        restart: "unless-stopped"
+    huey:
+        command: /app/manage.py run_huey
+        image: marcelkonrad/fuschpool
+        labels:
+            - "traefik.enable=false"
+        networks:
+            - mysql
+        restart: "unless-stopped"
+    redis:
+        image: redis:alpine
+        labels:
+            - "traefik.enable=false"
+        networks:
+            - mysql
         restart: "unless-stopped"
 
 networks:

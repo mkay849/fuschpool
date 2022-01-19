@@ -34,9 +34,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "bootstrap4",
     "core",
-    "django_apscheduler",
+    "huey.contrib.djhuey",
     "nfl",
-    "pick_pool.apps.PickPoolConfig",
+    # "pick_pool.apps.PickPoolConfig",
 ]
 
 MIDDLEWARE = [
@@ -94,9 +94,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
@@ -121,3 +121,10 @@ STATIC_URL = "/static/"
 STATIC_ROOT = str((Path(BASE_DIR) / "static").resolve())
 
 AUTH_USER_MODEL = "core.PickPoolUser"
+
+HUEY = {
+    "immediate": DEBUG,
+    "immediate_use_memory": DEBUG,
+    "connection": {"url": os.environ.get("REDIS_URL", "redis://redis:6379/?db=0")},
+    "consumer": {"workers": 2},
+}
