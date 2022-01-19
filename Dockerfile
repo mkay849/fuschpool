@@ -13,6 +13,5 @@ FROM base-image
 COPY --from=builder /opt/venv /opt/venv
 COPY app /app
 WORKDIR /app
-RUN python manage.py collectstatic --noinput
 EXPOSE 8000
-CMD ["gunicorn", "-w 4", "-k uvicorn.workers.UvicornWorker", "-b 0.0.0.0:8000", "pick_pool.asgi:application"]
+CMD ["/app/docker-entrypoint.sh"]
