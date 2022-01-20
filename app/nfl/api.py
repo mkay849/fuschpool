@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional
 
 import httpx
 from asgiref.sync import sync_to_async
+from django.db.models import Q
 from django.db.models.base import Model
 
 from nfl.defines import SeasonType
@@ -49,8 +50,18 @@ class EspnApiClient(object):
             if event_ids is None:
                 now_ts = datetime.now(timezone.utc)
                 missing_games = Game.objects.filter(
-                    timestamp__range=[now_ts - timedelta(days=14), now_ts], final=False
-                )
+                    Q(
+                        timestamp__range=[now_ts - timedelta(days=14), now_ts],
+                        final=False,
+                    )
+                    | Q(
+                        Q(home_team__isnull=True) | Q(visitor_team__isnull=True),
+                        timestamp__range=[
+                            now_ts - timedelta(days=14),
+                            now_ts + timedelta(days=14),
+                        ],
+                    )
+                ).select_related("home_team", "visitor_team")
             else:
                 missing_games = Game.objects.filter(event_id__in=event_ids)
         except Game.DoesNotExist:
@@ -79,6 +90,16 @@ class EspnApiClient(object):
                             f"Teams unknown for game on {event_json['date']}. Skipping..."
                         )
                         continue
+                    updated_fields = []
+                    if game.home_team is None and comp_res["home"]["team_id"]:
+                        game.home_team_id = comp_res["home"]["team_id"]
+                        updated_fields.append("home_team_id")
+                    if game.visitor_team is None and comp_res["visitor"]["team_id"]:
+                        game.visitor_team_id = comp_res["visitor"]["team_id"]
+                        updated_fields.append("visitor_team_id")
+                    if len(updated_fields):
+                        await sync_to_async(game.save)(update_fields=updated_fields)
+
                     updated = False
                     if game.final != comp_res["final"]:
                         game.final = comp_res["final"]
