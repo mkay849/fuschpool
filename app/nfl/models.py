@@ -61,10 +61,8 @@ class Team(models.Model):
             week__value__lte=cur_week.value,
         )
         cur_season_type = cur_week.season_type
-        if cur_season_type == SeasonType.REGULAR:
+        if cur_season_type in [SeasonType.REGULAR, SeasonType.POST]:
             season_games = season_games.exclude(week__value__lt=5)
-        elif cur_season_type == SeasonType.POST:
-            season_games = season_games.exclude(week__value__lt=23)
         elif cur_season_type == SeasonType.OFF:
             pass
         res = season_games.aggregate(

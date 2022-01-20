@@ -52,10 +52,8 @@ class SeasonGamesMixin(WeekMixin):
         context = super().get_context_data(**kwargs)
         season_games = self.season_games
         cur_season_type = self.week.season_type if self.week else SeasonType.OFF
-        if cur_season_type == SeasonType.REGULAR:
+        if cur_season_type in [SeasonType.REGULAR, SeasonType.POST]:
             season_games = season_games.exclude(week__value__lt=5)
-        elif cur_season_type == SeasonType.POST:
-            season_games = season_games.exclude(week__value__lt=23)
         elif cur_season_type == SeasonType.OFF:
             pass
         context["season_games"] = season_games
