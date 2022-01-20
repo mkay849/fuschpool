@@ -30,19 +30,12 @@ class WeekMixin(object):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        if "year" in kwargs and "month" in kwargs and "day" in kwargs:
-            cur_date = datetime.combine(
-                date(kwargs["year"], kwargs["month"], kwargs["day"]),
-                time(9),
-                tzinfo=timezone.utc,
-            )
+        if "season" in kwargs and "week" in kwargs:
+            query = Q(year__value=kwargs["season"], value=kwargs["week"])
         else:
             cur_date = datetime.now(timezone.utc)
-        self.week = (
-            Week.objects.select_related("year")
-            .filter(start_timestamp__lte=cur_date, end_timestamp__gt=cur_date)
-            .first()
-        )
+            query = Q(start_timestamp__lte=cur_date, end_timestamp__gt=cur_date)
+        self.week = Week.objects.select_related("year").filter(query).first()
 
 
 class SeasonGamesMixin(WeekMixin):
