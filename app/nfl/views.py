@@ -269,6 +269,10 @@ class StandingsView(LoginRequiredMixin, WeekMixin, TemplateView):
                     game__home_team_score__gt=F("game__visitor_team_score"),
                     selection=PickChoices.HOME_TEAM,
                 )
+                | Q(
+                    game__visitor_team_score=F("game__home_team_score"),
+                    selection=PickChoices.TIED_GAME,
+                )
             ).count()
             lost = season_picks.filter(
                 Q(
@@ -280,17 +284,10 @@ class StandingsView(LoginRequiredMixin, WeekMixin, TemplateView):
                     selection=PickChoices.VISITOR_TEAM,
                 )
             ).count()
-            tie = season_picks.filter(
-                Q(
-                    game__visitor_team_score=F("game__home_team_score"),
-                    selection=PickChoices.TIED_GAME,
-                )
-            ).count()
             standings[player] = {
                 "won": won,
                 "lost": lost,
-                "tie": tie,
-                "won_lost_ratio": won / (won + lost + tie) if won or lost or tie else 0,
+                "won_lost_ratio": won / (won + lost) if won or lost else 0,
             }
         context.update({"standings": standings})
         return context

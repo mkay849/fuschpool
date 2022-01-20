@@ -11,7 +11,7 @@
             <thead>
                 <tr class="justify-content-center">
                     <th scope="col">{% trans 'Name' %}</th>
-                    <th scope="col">{% trans 'Standings' %}<br><small>(W - L - T)</small></th>
+                    <th scope="col">{% trans 'Standings' %}<br><small>(W - L)</small></th>
                     <th scope="col">{% trans 'Pct' %}</th>
                 </tr>
             </thead>
@@ -19,7 +19,7 @@
                 {% for player, ps in standings.items %}
                 <tr>
                     <td>{{ player.first_name }}</td>
-                    <td>{{ ps.won }} - {{ ps.lost }} - {{ ps.tie }}</td>
+                    <td>{{ ps.won }} - {{ ps.lost }}</td>
                     <td>{{ ps.won_lost_ratio | floatformat:3 }}</td>
                 </tr>
                 {% endfor %}
