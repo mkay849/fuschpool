@@ -1,5 +1,5 @@
 import logging
-from datetime import date, datetime, time, timezone
+from datetime import datetime, timezone
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,7 +10,6 @@ from django.views.generic import ListView, TemplateView
 
 from nfl.defines import (
     CityChoices,
-    PickChoices,
     SeasonType,
     StadiumChoices,
     TeamChoices,
@@ -250,38 +249,7 @@ class StandingsView(LoginRequiredMixin, WeekMixin, TemplateView):
         standings = {}
         pick_pool_user = get_user_model()
         for player in pick_pool_user.objects.all():
-            season_picks = Pick.objects.filter(
-                user=player, game__week__year=self.week.year, game__final=True
-            )
-            won = season_picks.filter(
-                Q(
-                    game__visitor_team_score__gt=F("game__home_team_score"),
-                    selection=PickChoices.VISITOR_TEAM,
-                )
-                | Q(
-                    game__home_team_score__gt=F("game__visitor_team_score"),
-                    selection=PickChoices.HOME_TEAM,
-                )
-                | Q(
-                    game__visitor_team_score=F("game__home_team_score"),
-                    selection=PickChoices.TIED_GAME,
-                )
-            ).count()
-            lost = season_picks.filter(
-                Q(
-                    game__visitor_team_score__gt=F("game__home_team_score"),
-                    selection=PickChoices.HOME_TEAM,
-                )
-                | Q(
-                    game__home_team_score__gt=F("game__visitor_team_score"),
-                    selection=PickChoices.VISITOR_TEAM,
-                )
-            ).count()
-            standings[player] = {
-                "won": won,
-                "lost": lost,
-                "won_lost_ratio": won / (won + lost) if won or lost else 0,
-            }
+            standings[player] = player.standings(self.week.year.value)
         context.update({"standings": standings})
         return context
 
@@ -351,6 +319,9 @@ class PicksView(LoginRequiredMixin, WeekGamesMixin, ListView):
                             if user == self.request.user:
                                 continue
                             picks["picks"][idx] = None
+            for user, res_dict in new_picks.items():
+                cur_standings = user.standings(self.week.year.value)
+                res_dict["season_score"] = cur_standings.get("won")
             context[self.context_object_name] = new_picks
             context["unpicked_games"] = unpicked_games
         return context
