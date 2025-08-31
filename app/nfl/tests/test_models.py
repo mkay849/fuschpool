@@ -1,7 +1,4 @@
-from random import randrange
-
 import pytest
-
 from nfl.defines import PickChoices, TeamChoices
 from nfl.models import Game, Team, Week
 
@@ -10,7 +7,7 @@ from nfl.models import Game, Team, Week
 class TestGameModel:
     def test_string(self, nfl_game):
         assert str(nfl_game) == (
-            "Cincinnati Bengals at Chicago Bears" " on 2019-08-08 23:00:00+00:00"
+            "Buffalo Bills at Atlanta Falcons on 2019-08-08 23:00:00+00:00"
         )
 
     def test_properties(self, nfl_game):
@@ -31,9 +28,20 @@ class TestGameModel:
         user1 = make_pick_pool_user()
         user2 = make_pick_pool_user()
         user3 = make_pick_pool_user()
-        p1 = make_pick(game=nfl_game, user=user1,)
-        p2 = make_pick(game=nfl_game, selection=PickChoices.VISITOR_TEAM, user=user2,)
-        p3 = make_pick(game=nfl_game, selection=PickChoices.TIED_GAME, user=user3,)
+        p1 = make_pick(
+            game=nfl_game,
+            user=user1,
+        )
+        p2 = make_pick(
+            game=nfl_game,
+            selection=PickChoices.VISITOR_TEAM,
+            user=user2,
+        )
+        p3 = make_pick(
+            game=nfl_game,
+            selection=PickChoices.TIED_GAME,
+            user=user3,
+        )
         nfl_game.home_team_score = 23
         nfl_game.visitor_team_score = 27
 
@@ -80,8 +88,8 @@ class TestTeamModel:
 class TestPickModel:
     def test_string(self, pick):
         assert str(pick) == (
-            f"{pick.user.first_name} picked 'Home Team' for Cincinnati Bengals"
-            " at Chicago Bears on 2019-08-08 23:00:00+00:00"
+            f"{pick.user.first_name} picked 'Home Team' for Buffalo Bills"
+            " at Atlanta Falcons on 2019-08-08 23:00:00+00:00"
         )
 
     def test_awarded_points(self, pick):
@@ -117,7 +125,9 @@ class TestWeekModel:
         for idx, game in enumerate(Game.objects.all()):
             make_pick(user=user1, game=game)
             make_pick(
-                user=user2, game=game, selection=PickChoices.VISITOR_TEAM,
+                user=user2,
+                game=game,
+                selection=PickChoices.VISITOR_TEAM,
             )
             make_pick(user=user3, game=game)
             if idx % 2 == 0:
@@ -128,7 +138,7 @@ class TestWeekModel:
             game.home_team_score = 3
             game.visitor_team_score = 7
             game.save()
-        res = Week.objects.evaluate_week(2019, 2)
+        res = Week.objects.evaluate_week(2019, 5)
         assert len(res) == 3
         assert res[0] == (17, [user2])
         assert res[1] == (9, [user4])

@@ -1,17 +1,10 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
 from django.conf import settings
-from pytz import utc
-from yaml import safe_load
-
 from nfl.models import Game, Team
-
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
+from yaml import safe_load
 
 
 @pytest.fixture
@@ -27,11 +20,13 @@ def make_nfl_game(week):
     def _make_nfl_game(**kwargs):
         home_team = kwargs.get("home_team", Team.objects.get(pk=1))
         visitor_team = kwargs.get("visitor_team", Team.objects.get(pk=2))
+        latest_game = Game.objects.last()
         return Game.objects.get_or_create(
-            week=week,
-            timestamp=kwargs.get("timestamp", datetime(2019, 8, 8, 23, tzinfo=utc)),
+            week=kwargs.get("week", week),
+            timestamp=kwargs.get("timestamp", datetime(2019, 8, 8, 23, tzinfo=UTC)),
             home_team=home_team,
             visitor_team=visitor_team,
+            event_id=latest_game.event_id + 1 if latest_game else 42,
         )[0]
 
     return _make_nfl_game
@@ -45,8 +40,10 @@ def nfl_games(make_nfl_game, make_week, **kwargs):
     with fixture.open("r") as yaml_file:
         data = safe_load(yaml_file)
         for game in data:
+            if game["model"] != "nfl.game":
+                continue
             game_data = game["fields"]
-            if game_data["week"] == cur_week.week:
+            if game_data["week"] == cur_week.value:
                 make_nfl_game(
                     week=cur_week,
                     home_team=Team.objects.get(pk=game_data.get("home_team")),

@@ -1,13 +1,13 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Dict, List, Tuple
-from pytz import timezone
+from zoneinfo import ZoneInfo
 
+from core.models import PickPoolUser
 from django.conf import settings
 from django.db import models
 from django.db.models import F, Q
 from django.db.models.aggregates import Count
 
-from core.models import PickPoolUser
 from nfl.defines import (
     CityChoices,
     PickChoices,
@@ -16,7 +16,7 @@ from nfl.defines import (
     TeamChoices,
 )
 
-est_tz = timezone("EST")
+est_tz = ZoneInfo("EST")
 
 
 class DateRangeMixin(models.Model):
@@ -48,7 +48,7 @@ class Team(models.Model):
 
     @property
     def standings(self) -> Tuple[int, int, int]:
-        cur_date = datetime.now(timezone("UTC"))
+        cur_date = datetime.now(UTC)
         cur_week = (
             Week.objects.select_related("year")
             .filter(start_timestamp__lte=cur_date, end_timestamp__gt=cur_date)
@@ -81,7 +81,8 @@ class Team(models.Model):
             lost=Count(
                 "id",
                 filter=Q(
-                    home_team=self.id, home_team_score__lt=F("visitor_team_score"),
+                    home_team=self.id,
+                    home_team_score__lt=F("visitor_team_score"),
                 ),
             )
             + Count(
@@ -147,7 +148,7 @@ class WeekManager(models.Manager):
             List of tuples containing earned points with corresponding users.
         """
         try:
-            cur_week = self.get(year__year=year, week=week)
+            cur_week = self.get(year__value=year, value=week)
             user_points = {}
             for game in cur_week.games.all():
                 game_points = game.evaluate_game()
